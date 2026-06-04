@@ -19,8 +19,6 @@
 <meta name="theme-color" content="#FF5500">
 <link rel="canonical" href="https://linktr.ee/kmoonclimb">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -59,7 +57,7 @@ nav{position:fixed!important;top:52px!important;left:0!important;right:0!importa
 /* HERO */
 #hero{min-height:calc(100vh - var(--bars-h));display:flex;flex-direction:column;justify-content:flex-end;padding:0 5vw 8vh;position:relative;overflow:hidden}
 /* A1: Substitua pela sua foto: background-image: url('sua-foto.jpg'); */
-.hero-photo{position:absolute;inset:0;background-size:120% auto;background-position:center 35%;z-index:0;background-color:#161616;background-image:linear-gradient(135deg,#1a1a1a 0%,#0d1a0d 50%,#1a0d00 100%)}
+.hero-photo{position:absolute;inset:0;background-size:cover;background-position:center center;background-repeat:no-repeat;z-index:0;background-color:#161616;background-image:linear-gradient(135deg,#1a1a1a 0%,#0d1a0d 50%,#1a0d00 100%)}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,10,0.3) 0%,rgba(10,10,10,0.55) 40%,rgba(10,10,10,0.97) 100%)}
 .hero-grid-bg{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(255,85,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,0,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(180deg,transparent 0%,black 30%,black 70%,transparent 100%)}
 .hero-content{position:relative;z-index:3}
@@ -308,7 +306,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 
   /* HERO */
   #hero{padding:0 4vw 5vh}
-  .hero-photo{background-size:120% auto;background-position:center 35%}
+  .hero-photo{background-size:cover;background-position:center center}
   h1.hero-title{font-size:clamp(3.5rem,18vw,6rem)}
   .hero-sub{font-size:1rem;max-width:100%}
   .hero-actions{flex-direction:column;align-items:flex-start;gap:.75rem}
@@ -386,7 +384,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
   h1.hero-title{font-size:clamp(3rem,20vw,5rem)}
   .hstat{min-width:100%}
   .plans-notice{padding:1rem 1rem}
-  .hero-photo{background-size:120% auto;background-position:center 35%}
+  .hero-photo{background-size:cover;background-position:center center}
 }
 
 /* C4: Respeita preferência de movimento reduzido */
@@ -429,6 +427,422 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 #countdown-bar.season-maes      { background: #9b1c4e; }
 #countdown-bar.season-pais      { background: #0a4a6b; }
 
+
+
+/* ── FORM MODAL & EBOOK & COUNTDOWN (movido para <head>) ── */
+#form-modal{font-family:'Inter',sans-serif}
+#form-modal .cover{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;border-bottom:1px solid #2e2e2e;text-align:center;background:#121212}
+#form-modal .cover::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(230,163,23,.05),transparent);pointer-events:none}
+#form-modal .cover-brand{font-size:2rem;letter-spacing:.15em;line-height:1;margin-bottom:1.5rem;font-family:'Bebas Neue',sans-serif;color:#ededed}
+#form-modal .cover-sub{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#8c8c8c;margin-bottom:1rem;font-family:'JetBrains Mono',monospace}
+#form-modal .cover h1{font-size:2rem;line-height:.95;margin-bottom:1rem;font-family:'Bebas Neue',sans-serif;color:#ededed}
+#form-modal .cover h1 .muted{color:#8c8c8c}
+#form-modal .cover h1 .highlight{color:#e6a317}
+#form-modal .cover p{color:#8c8c8c;font-size:.875rem;max-width:32rem;line-height:1.6}
+#form-modal .form-container{max-width:100%;margin:0;padding:2rem 0;display:flex;flex-direction:column;gap:2rem;background:#121212}
+#form-modal section.form-section{background:#1a1a1a;border:1px solid #2e2e2e;padding:1.5rem;border-radius:2px}
+#form-modal .section-title{font-size:1.2rem;letter-spacing:.08em;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid #2e2e2e;font-family:'Bebas Neue',sans-serif;color:#ededed}
+#form-modal .grid{display:grid;gap:1.25rem}
+#form-modal .grid-2{grid-template-columns:1fr 1fr}
+#form-modal .field-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#8c8c8c;margin-bottom:.4rem;display:block}
+#form-modal input,#form-modal textarea,#form-modal select{width:100%;background:#121212;border:1px solid #2e2e2e;color:#ededed;padding:.6rem .8rem;font-family:'Inter',sans-serif;font-size:.875rem;outline:none;border-radius:2px}
+#form-modal input:focus,#form-modal textarea:focus,#form-modal select:focus{border-color:#e6a317}
+#form-modal select{cursor:pointer}
+#form-modal select option{background:#121212;color:#ededed}
+#form-modal .checkbox-group{display:flex;flex-direction:column;gap:.5rem}
+#form-modal .checkbox-group label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:#ededed;cursor:pointer;margin-bottom:0;text-transform:none;letter-spacing:0}
+#form-modal .checkbox-group input[type="checkbox"]{width:16px;height:16px;min-width:16px;accent-color:#e6a317}
+#form-modal .btn-submit{width:100%;background:#e6a317;color:#0d0d0d;border:none;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.15em;text-transform:uppercase;padding:1rem;margin-top:1rem;transition:opacity .2s}
+#form-modal .btn-submit:hover{opacity:.9}
+#form-modal .btn-submit:disabled{opacity:.5;cursor:not-allowed}
+#form-modal .font-display{font-family:'Bebas Neue',sans-serif}
+#form-modal .font-mono{font-family:'JetBrains Mono',monospace}
+#form-modal .footer{padding:2rem;text-align:center;font-size:.75rem;letter-spacing:.2em;color:#8c8c8c;border-top:1px solid #2e2e2e;margin-top:1rem}
+@media(max-width:640px){
+  #form-modal .grid-2{grid-template-columns:1fr}
+  #form-modal section.form-section{padding:1rem}
+  #form-modal .cover{padding:2rem 1rem}
+  #form-modal > div{padding:0 4px 40px}
+}
+
+@media(max-width:640px){
+  #countdown-bar:not(.minimized){gap:.5rem;padding:0 3vw;flex-wrap:nowrap;overflow:hidden}
+  #cd-promo-label{display:none!important}
+  .cd-block{min-width:36px;padding:3px 5px}
+  .cd-num{font-size:1.1rem}
+  nav{padding:0 4vw}
+  nav ul{gap:.8rem}
+  nav ul li a{font-size:.6rem}
+  #countdown-bar button[onclick="openFormModal()"]{font-size:.65rem;padding:5px 10px}
+}
+
+/* ── COUNTDOWN MINIMIZADO ── */
+#countdown-bar.minimized{height:8px!important;overflow:hidden;cursor:pointer;padding:0!important}
+#countdown-bar.minimized > *{display:none!important}
+#countdown-bar.minimized::after{
+  content:'▼';
+  display:block;width:100%;height:8px;
+  background:#FF5500;color:#fff;
+  font-size:6px;line-height:8px;
+  text-align:center;cursor:pointer;
+}
+#countdown-bar.minimized + /* removed conflicting nav top */
+body.cd-minimized{padding-top:72px!important}
+html.cd-minimized{scroll-padding-top:72px!important}
+
+
+#countdown-bar.minimized + nav{top:8px!important}
+
+
+/* Mockup visual do ebook */
+.ebook-mockup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ebook-cover {
+  width: 260px;
+  height: 340px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0d1a0d 60%, #1a0d00 100%);
+  border: 1px solid rgba(255,85,0,0.3);
+  border-radius: 4px 12px 12px 4px;
+  box-shadow:
+    -6px 6px 0 rgba(0,0,0,0.6),
+    0 20px 60px rgba(255,85,0,0.15),
+    0 0 0 1px rgba(255,85,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform: rotate(-2deg);
+  transition: transform .3s var(--ease-spring);
+}
+.ebook-cover:hover { transform: rotate(0deg) scale(1.03); }
+.ebook-cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--orange);
+}
+.ebook-cover-tag {
+  font-family: var(--fh);
+  font-size: .6rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: .75rem;
+}
+.ebook-cover-num {
+  font-family: var(--fh);
+  font-weight: 900;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--orange);
+  text-shadow: 0 0 40px rgba(255,85,0,0.5);
+}
+.ebook-cover-erros {
+  font-family: var(--fh);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: .1em;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+.ebook-cover-sub {
+  font-size: .65rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.ebook-cover-author {
+  position: absolute;
+  bottom: 1.2rem;
+  font-family: var(--fh);
+  font-size: .65rem;
+  letter-spacing: .15em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+.ebook-badge-free {
+  position: absolute;
+  top: -10px; right: -10px;
+  background: #22c55e;
+  color: #fff;
+  font-family: var(--fh);
+  font-weight: 900;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transform: rotate(8deg);
+  box-shadow: 0 4px 12px rgba(34,197,94,0.4);
+}
+
+/* Content side */
+.ebook-tag {
+  display: inline-block;
+  font-family: var(--fh);
+  font-weight: 700;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid rgba(255,85,0,0.3);
+  padding: 5px 14px;
+  margin-bottom: 1.5rem;
+}
+.ebook-title {
+  font-family: var(--fh);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  letter-spacing: -.01em;
+}
+.ebook-lead {
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+.ebook-list {
+  list-style: none;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.ebook-list li {
+  display: flex;
+  gap: .75rem;
+  align-items: flex-start;
+  font-size: .9rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.ebook-list li::before {
+  content: '✓';
+  color: var(--orange);
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ebook-price-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.ebook-price-old {
+  font-family: var(--fh);
+  font-size: 1.1rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.ebook-price-new {
+  font-family: var(--fh);
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: #22c55e;
+  line-height: 1;
+}
+.ebook-price-label {
+  font-size: .7rem;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.ebook-guarantee {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.ebook-guarantee-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(34,197,94,.12);
+  border: 1px solid rgba(34,197,94,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  flex-shrink: 0;
+}
+.ebook-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  max-width: 420px;
+}
+.btn-ebook-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  background: #25D366;
+  color: #fff;
+  font-family: var(--fh);
+  font-weight: 700;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition: background .2s, transform .15s;
+  border: none;
+  cursor: pointer;
+}
+.btn-ebook-wa:hover { background: #1EB857; transform: translateY(-2px); }
+.btn-ebook-kiwify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  background: transparent;
+  color: var(--orange);
+  font-family: var(--fh);
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border: 1px solid rgba(255,85,0,0.4);
+  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition: background .2s, border-color .2s;
+}
+.btn-ebook-kiwify:hover { background: rgba(255,85,0,0.08); border-color: var(--orange); }
+.ebook-social-proof {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.ebook-stars { color: #facc15; letter-spacing: .05em; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CORREÇÕES DE RESPONSIVIDADE — MOBILE FIRST
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Garantir que nada ultrapasse a largura da tela */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+img, video, canvas, svg { max-width: 100%; height: auto; }
+
+/* Hero: foto sem repetição e cobrindo bem em mobile */
+.hero-photo {
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+/* Hero: corrigir texto cortado em telas muito pequenas */
+h1.hero-title { word-break: break-word; }
+.hero-sub { max-width: 100%; }
+
+/* Ebook: layout responsivo */
+#ebook { overflow: hidden; }
+.ebook-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .ebook-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .ebook-cover {
+    width: 200px;
+    height: 265px;
+  }
+  .ebook-ctas { max-width: 100%; }
+  .btn-ebook-wa, .btn-ebook-kiwify {
+    clip-path: none;
+    border-radius: 4px;
+  }
+}
+
+/* Plans: cards não transbordam em mobile */
+@media (max-width: 600px) {
+  .pcard { min-width: 0; }
+  .plans-tabs { flex-wrap: wrap; }
+  .tab-btn { flex: 1 1 auto; font-size: .7rem; }
+  .comp-table { font-size: .75rem; }
+  .comp-table th, .comp-table td { padding: .5rem .4rem; }
+}
+
+/* Story: imagem não transborda */
+.story-img-wrap { overflow: hidden; max-width: 100%; }
+.story-img { max-width: 100%; width: 100%; }
+
+/* Gallery: imagens não transbordam */
+.gallery-strip { width: 100%; }
+.gallery-item { max-width: 100%; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* FAQ: texto não transborda */
+.faq-q, .faq-a { word-break: break-word; overflow-wrap: break-word; }
+
+/* Location: imagem responsiva */
+#location img, .loc-img { max-width: 100%; width: 100%; }
+
+/* Botões: não transbordam em mobile */
+@media (max-width: 480px) {
+  .btn-primary, .btn-ghost {
+    font-size: .75rem;
+    padding: 14px 20px;
+    white-space: normal;
+    word-break: break-word;
+  }
+  .hero-actions { gap: .6rem; }
+  .hero-stats { gap: .75rem; }
+  .hstat .num { font-size: clamp(1.5rem, 8vw, 2.5rem); }
+}
+
+/* Countdown bar: sempre 100% largura */
+#countdown-bar {
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Nav: sem overflow */
+nav { max-width: 100%; overflow: hidden; }
+
+/* Sections: padding seguro em mobile */
+@media (max-width: 400px) {
+  section { padding: 3.5rem 4vw; }
+  .ebook-mockup { display: none; } /* esconder mockup em telas muito pequenas */
+}
+
+/* Mobile nav bar: garantir z-index e largura */
+.mobile-nav-bar {
+  width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  box-sizing: border-box;
+}
 </style>
 <meta property="og:title" content="KMoon Climb · Escola de Escalada | Botafogo, Rio de Janeiro">
 <meta property="og:description" content="Aprenda escalada com Rodrigo Alves, ex-atleta profissional CDE. Aulas individuais e em grupo. 1ª aula com 40% OFF. Botafogo, RJ.">
@@ -1472,8 +1886,8 @@ const IMG_GALLERY_2 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA
 
 // INJECT PHOTOS
 document.getElementById("hero-photo").style.backgroundImage = `url(${IMG_HERO_BG})`;
-    document.getElementById("hero-photo").style.backgroundPosition = "center 35%";
-    document.getElementById("hero-photo").style.backgroundSize = "120% auto";
+    document.getElementById("hero-photo").style.backgroundPosition = "center center";
+    document.getElementById("hero-photo").style.backgroundSize = "cover";
 document.getElementById("story-img").src = IMG_RODRIGO_SMILE;
 document.getElementById("story-img").alt = "Rodrigo Alves em parede de escalada";
 document.getElementById("loc-img").src = IMG_GYM_WIDE;
@@ -1808,871 +2222,231 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 
-<div id="form-modal" role="dialog" aria-modal="true" aria-label="Questionário de mapeamento" style="display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;background:rgba(0,0,0,.92);backdrop-filter:blur(10px)">
-  <div style="max-width:820px;margin:16px auto;padding:0 10px 60px">
-    <div style="position:sticky;top:10px;text-align:right;margin-bottom:-48px;z-index:10">
+<div id="form-modal" role="dialog" aria-modal="true" aria-label="Formulário de contato" style="display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;background:rgba(0,0,0,.88);backdrop-filter:blur(8px)">
+  <div style="max-width:860px;margin:20px auto;padding:0 12px 40px">
+    <div style="position:sticky;top:12px;text-align:right;margin-bottom:-44px;z-index:10">
       <button onclick="closeFormModal()" style="background:#FF5500;color:#fff;border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;padding:10px 18px">&#10005; FECHAR</button>
     </div>
     <div style="clear:both"></div>
-
-<!-- ═══ WIZARD KMOON ═══ -->
-<div id="qwiz-root">
-
-  <!-- COVER -->
-  <div class="qwiz-cover">
-    <div class="qwiz-brand">KMOON CLIMB</div>
-    <div class="qwiz-sub">Mapeamento Completo do Atleta · 2026</div>
-    <h2 class="qwiz-h1">SEU PERFIL<br/><span class="qwiz-accent">COMPLETO</span></h2>
-    <p class="qwiz-lead-txt">Quanto mais você compartilha, mais preciso fica o seu plano de evolução — físico <em>e</em> mental.</p>
-    <div class="qwiz-badges">
-      <span class="qwiz-badge">⏱ ~5 minutos</span>
-      <span class="qwiz-badge">🔒 dados privados</span>
-      <span class="qwiz-badge">📋 gera PDF + WhatsApp</span>
-    </div>
+<!-- COVER -->
+  <div class="cover">
+    <div class="cover-brand font-display">KMOON CLIMB</div>
+    <div class="cover-sub font-mono">Questionário de Mapeamento</div>
+    <h1 class="font-display">
+      <span class="muted">CONHEÇA SEU</span><br />
+      <span class="highlight">PERFIL COMPLETO</span>
+    </h1>
+    <p>Responda com atenção. Quanto mais detalhes, mais personalizado será seu plano de evolução.</p>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="qwiz-progress" id="qwizProgress" style="display:none">
-    <div class="qwiz-prog-bg"><div class="qwiz-prog-fill" id="qwizFill" style="width:0%"></div></div>
-    <span class="qwiz-prog-lbl" id="qwizLbl">1 / 9</span>
-  </div>
+  <!-- FORMULÁRIO -->
+  <div class="form-container">
 
-  <!-- STEPS WRAPPER -->
-  <div class="qwiz-body" id="qwizBody">
+    <!-- Seção 1: Dados Pessoais -->
+    <section class="form-section">
+      <h2 class="section-title font-display">01. DADOS PESSOAIS</h2>
+      <div class="grid grid-2">
+        <div class="col-span-2">
+          <label class="field-label" for="nomeCompleto">Nome completo *</label>
+          <input id="nomeCompleto" type="text" name="nomeCompleto" required />
+        </div>
+        <div>
+          <label class="field-label" for="idade">Idade</label>
+          <input id="idade" type="text" name="idade" />
+        </div>
+        <div>
+          <label class="field-label" for="whatsapp">WhatsApp (com DDD)</label>
+          <input id="whatsapp" type="text" name="whatsapp" />
+        </div>
+        <div>
+          <label class="field-label" for="email">E-mail</label>
+          <input id="email" type="email" name="email" />
+        </div>
+        <div>
+          <label class="field-label" for="cidadeUf">Cidade / Estado</label>
+          <input id="cidadeUf" type="text" name="cidadeUf" />
+        </div>
+      </div>
+    </section>
 
-    <!-- ── STEP 1: DADOS PESSOAIS ── -->
-    <div class="qwiz-step active" data-step="1">
-      <div class="qwiz-sh"><span class="qwiz-snum">01 / 09</span><h3 class="qwiz-stitle">DADOS PESSOAIS</h3><p class="qwiz-sdesc">Informações básicas para o seu perfil de aluno.</p></div>
-      <div class="qwiz-g2">
-        <div class="qwiz-f qwiz-c2"><label class="qwiz-lbl">Nome completo <span class="qwiz-req">*</span></label><input id="qNome" type="text" name="qNome" placeholder="Como você se chama?" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Idade</label><input id="qIdade" type="number" name="qIdade" min="5" max="99" placeholder="Ex: 28" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">WhatsApp (DDD)</label><input id="qWA" type="tel" name="qWA" placeholder="(21) 99999-9999" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">E-mail</label><input id="qEmail" type="email" name="qEmail" placeholder="seu@email.com" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Cidade / Estado</label><input id="qCidade" type="text" name="qCidade" placeholder="Ex: Rio de Janeiro / RJ" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Gênero</label><select name="qGenero"><option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Não-binário</option><option>Prefiro não informar</option></select></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Altura (cm)</label><input type="number" name="qAltura" min="100" max="230" placeholder="Ex: 175" /><div class="qwiz-hint">Junto com o peso, calcula o ratio força/peso — determinante em escalada.</div></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Peso (kg)</label><input type="number" name="qPeso" min="30" max="200" placeholder="Ex: 72" /></div>
-        <div class="qwiz-f qwiz-c2"><label class="qwiz-lbl">Envergadura (cm) <span class="qwiz-opt">opcional</span></label><input type="number" name="qEnvergadura" placeholder="Braços abertos ponta a ponta — Ex: 178" /><div class="qwiz-hint">O índice ápico (envergadura − altura) é um diferencial natural na escalada.</div></div>
+    <!-- Seção 2: Experiência e Objetivos -->
+    <section class="form-section">
+      <h2 class="section-title font-display">02. EXPERIÊNCIA E OBJETIVOS</h2>
+      <div class="grid grid-2">
+        <div>
+          <label class="field-label" for="tempoEscalada">Há quanto tempo você escala?</label>
+          <input id="tempoEscalada" type="text" name="tempoEscalada" />
+        </div>
+        <div>
+          <label class="field-label" for="nivelAutoavaliado">Nível autoavaliado (0-10)</label>
+          <input id="nivelAutoavaliado" type="number" name="nivelAutoavaliado" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="estiloPreferido">Estilo preferido</label>
+          <select id="estiloPreferido" name="estiloPreferido">
+            <option value="">Selecione</option>
+            <option value="Boulder">Boulder</option>
+            <option value="Esportiva (vias com corda)">Esportiva (vias com corda)</option>
+            <option value="Ambos">Ambos</option>
+            <option value="Outdoor exclusivamente">Outdoor exclusivamente</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="frequenciaSemanal">Frequência semanal atual (média)</label>
+          <input id="frequenciaSemanal" type="text" name="frequenciaSemanal" placeholder="ex: 2x por semana" />
+        </div>
+        <div class="col-span-2">
+          <label class="field-label" for="objetivosPrincipais">Quais seus principais objetivos na escalada?</label>
+          <textarea id="objetivosPrincipais" name="objetivosPrincipais" rows="3"></textarea>
+        </div>
       </div>
-      <div class="qwiz-nav"><div></div><button class="qwiz-btn qwiz-next" onclick="qNext(1)">PRÓXIMO →</button></div>
-    </div>
+    </section>
 
-    <!-- ── STEP 2: EXPERIÊNCIA ── -->
-    <div class="qwiz-step" data-step="2">
-      <div class="qwiz-sh"><span class="qwiz-snum">02 / 09</span><h3 class="qwiz-stitle">EXPERIÊNCIA NA ESCALADA</h3><p class="qwiz-sdesc">Onde você está agora para traçar o melhor caminho.</p></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Há quanto tempo você escala?</label>
-        <div class="qwiz-cg qwiz-cg3">
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="Menos de 3 meses"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🌱</div><div class="qwiz-cl">Menos de 3 meses</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="3 a 12 meses"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">📈</div><div class="qwiz-cl">3 a 12 meses</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="1 a 2 anos"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🧗</div><div class="qwiz-cl">1 a 2 anos</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="2 a 5 anos"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">💪</div><div class="qwiz-cl">2 a 5 anos</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="Mais de 5 anos"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🏆</div><div class="qwiz-cl">Mais de 5 anos</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qTempo" value="Nunca escalei"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">👀</div><div class="qwiz-cl">Ainda não escalei</div></label>
+    <!-- Seção 3: Autoavaliação Técnica -->
+    <section class="form-section">
+      <h2 class="section-title font-display">03. AUTOAVALIAÇÃO TÉCNICA (0 a 10)</h2>
+      <div class="grid grid-2">
+        <div>
+          <label class="field-label" for="tecnicaPes">Técnica de pés</label>
+          <input id="tecnicaPes" type="number" name="tecnicaPes" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="leituraVia">Leitura de via / resolução de problemas</label>
+          <input id="leituraVia" type="number" name="leituraVia" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="forcaPreensao">Força de preensão (dedos)</label>
+          <input id="forcaPreensao" type="number" name="forcaPreensao" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="resistenciaAntebraco">Resistência de antebraço (bombamento)</label>
+          <input id="resistenciaAntebraco" type="number" name="resistenciaAntebraco" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="potencia">Potência / explosividade</label>
+          <input id="potencia" type="number" name="potencia" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="controleEmocional">Controle emocional / gestão do medo</label>
+          <input id="controleEmocional" type="number" name="controleEmocional" min="0" max="10" value="5" />
+        </div>
+        <div>
+          <label class="field-label" for="flexibilidade">Flexibilidade</label>
+          <input id="flexibilidade" type="number" name="flexibilidade" min="0" max="10" value="5" />
         </div>
       </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Estilo que prefere ou quer aprender <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-cg qwiz-cg2">
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qEstilo" value="Boulder"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🪨</div><div class="qwiz-cl">Boulder</div><div class="qwiz-cs">Sem corda, movimentos curtos e intensos</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qEstilo" value="Lead / Esportiva"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🪢</div><div class="qwiz-cl">Lead / Esportiva</div><div class="qwiz-cs">Vias longas com resistência</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qEstilo" value="Top-rope"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🔗</div><div class="qwiz-cl">Top-rope</div><div class="qwiz-cs">Corda de cima, mais seguro para aprender</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qEstilo" value="Outdoor"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🏔️</div><div class="qwiz-cl">Outdoor</div><div class="qwiz-cs">Escalada em rocha natural</div></label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Frequência de treino atual</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFreq" value="Ainda não treino"/>Ainda não treino</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFreq" value="1x/semana"/>1x/semana</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFreq" value="2x/semana"/>2x/semana</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFreq" value="3x/semana"/>3x/semana</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFreq" value="4x ou mais"/>4x ou mais</label>
-        </div>
-      </div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(2)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(2)">PRÓXIMO →</button></div>
-    </div>
+    </section>
 
-    <!-- ── STEP 3: OBJETIVOS ── -->
-    <div class="qwiz-step" data-step="3">
-      <div class="qwiz-sh"><span class="qwiz-snum">03 / 09</span><h3 class="qwiz-stitle">SEUS OBJETIVOS</h3><p class="qwiz-sdesc">Onde você quer chegar? Seja honesto — não existe objetivo errado.</p></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">O que te motivou a começar ou continuar na escalada? <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-cg qwiz-cg2">
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Superação pessoal"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🎯</div><div class="qwiz-cl">Superação pessoal</div><div class="qwiz-cs">Quero me desafiar e evoluir</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Saúde e condicionamento"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">💚</div><div class="qwiz-cl">Saúde e condicionamento</div><div class="qwiz-cs">Quero ficar mais forte e saudável</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Comunidade"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🤝</div><div class="qwiz-cl">Comunidade</div><div class="qwiz-cs">Gosto do ambiente e das pessoas</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Aventura e natureza"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🌿</div><div class="qwiz-cl">Aventura / Natureza</div><div class="qwiz-cs">Quero escalar em rocha outdoor</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Competição"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🏅</div><div class="qwiz-cl">Competição</div><div class="qwiz-cs">Quero competir e ser avaliado</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMotiv" value="Saúde mental / estresse"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🧘</div><div class="qwiz-cl">Saúde mental</div><div class="qwiz-cs">Escalada como fuga do estresse</div></label>
+    <!-- Seção 4: Histórico de Lesões e Saúde -->
+    <section class="form-section">
+      <h2 class="section-title font-display">04. HISTÓRICO DE LESÕES E SAÚDE</h2>
+      <div class="grid">
+        <div>
+          <label class="field-label" for="lesoesPassadas">Lesões passadas (tendinite, ruptura, etc.)</label>
+          <textarea id="lesoesPassadas" name="lesoesPassadas" rows="2"></textarea>
+        </div>
+        <div>
+          <label class="field-label" for="problemasCronicos">Problemas crônicos / doenças (ex: diabetes, labirintite, hérnia)</label>
+          <textarea id="problemasCronicos" name="problemasCronicos" rows="2"></textarea>
+        </div>
+        <div>
+          <label class="field-label" for="lesoesAtuais">Lesões ou dores atuais (descreva local e intensidade)</label>
+          <textarea id="lesoesAtuais" name="lesoesAtuais" rows="2"></textarea>
+        </div>
+        <div>
+          <label class="field-label" for="restricoesMedicas">Restrições médicas para treino (cardíacas, respiratórias, etc.)</label>
+          <textarea id="restricoesMedicas" name="restricoesMedicas" rows="2"></textarea>
+        </div>
+        <div>
+          <label class="field-label" for="acompanhamentoFisioterapia">Faz acompanhamento com fisioterapeuta ou médico?</label>
+          <input id="acompanhamentoFisioterapia" type="text" name="acompanhamentoFisioterapia" />
         </div>
       </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Objetivo principal nos próximos 3 meses</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Aprender o básico"/>Aprender o básico</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Subir de graduação"/>Subir de graduação</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Fazer minha 1ª outdoor"/>1ª outdoor</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Superar lesão"/>Superar lesão</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Consistência no treino"/>Consistência</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qObj3m" value="Competir"/>Competir</label>
-        </div>
-      </div>
-      <div class="qwiz-f"><label class="qwiz-lbl">Sonho de longo prazo na escalada <span class="qwiz-opt">opcional</span></label><textarea name="qObjLongo" rows="2" placeholder="Ex: Quero subir 7a no outdoor, competir, só me sentir confiante na parede..."></textarea></div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(3)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(3)">PRÓXIMO →</button></div>
-    </div>
+    </section>
 
-    <!-- ── STEP 4: AUTOAVALIAÇÃO TÉCNICA ── -->
-    <div class="qwiz-step" data-step="4">
-      <div class="qwiz-sh"><span class="qwiz-snum">04 / 09</span><h3 class="qwiz-stitle">AUTOAVALIAÇÃO TÉCNICA</h3><p class="qwiz-sdesc">Deslize cada barra conforme como você se sente hoje. Seja honesto — isso monta o treino certo.</p></div>
-      <div id="qwizSliders"></div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(4)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(4)">PRÓXIMO →</button></div>
-    </div>
+    <!-- Seção 5: Local de Treino e Equipamentos -->
+    <section class="form-section">
+      <h2 class="section-title font-display">05. LOCAL DE TREINO E EQUIPAMENTOS</h2>
+      <div class="grid grid-2">
+        <div class="col-span-2">
+          <label class="field-label" for="academiaNome">Academia onde treina (nome)</label>
+          <input id="academiaNome" type="text" name="academiaNome" />
+        </div>
+        <div>
+          <label class="field-label" for="academiaCidade">Cidade da academia</label>
+          <input id="academiaCidade" type="text" name="academiaCidade" />
+        </div>
+        <div>
+          <label class="field-label" for="treinaOutdoor">Treina outdoor?</label>
+          <select id="treinaOutdoor" name="treinaOutdoor">
+            <option value="">Selecione</option>
+            <option value="Sim, regularmente">Sim, regularmente</option>
+            <option value="Raramente">Raramente</option>
+            <option value="Ainda não">Ainda não</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="localOutdoor">Se treina outdoor, quais locais?</label>
+          <input id="localOutdoor" type="text" name="localOutdoor" />
+        </div>
+        <div class="col-span-2">
+          <label class="field-label">Equipamentos que possui em casa (múltipla escolha)</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="equipamentosCasa" value="Hangboard / Fingerboard" /> Hangboard / Fingerboard</label>
+            <label><input type="checkbox" name="equipamentosCasa" value="Barra fixa" /> Barra fixa</label>
+            <label><input type="checkbox" name="equipamentosCasa" value="Argolas" /> Argolas</label>
+            <label><input type="checkbox" name="equipamentosCasa" value="Peso / Caneleiras" /> Peso / Caneleiras</label>
+            <label><input type="checkbox" name="equipamentosCasa" value="Banco de peso" /> Banco de peso</label>
+            <label><input type="checkbox" name="equipamentosCasa" value="Grip trainers (mola)" /> Grip trainers (mola)</label>
+          </div>
+          <input type="text" name="outroEquipamento" placeholder="Outros equipamentos (ex: fingerboard custom, argolas, etc.)" style="margin-top: 0.75rem;" />
+        </div>
+      </div>
+    </section>
 
-    <!-- ── STEP 5: MENTALIDADE ── -->
-    <div class="qwiz-step" data-step="5">
-      <div class="qwiz-sh"><span class="qwiz-snum">05 / 09</span><h3 class="qwiz-stitle">MENTALIDADE & PSICOLOGIA</h3><p class="qwiz-sdesc">A maior barreira na escalada é a cabeça, não o físico. Essas são as perguntas mais importantes.</p></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">O que te paralisa mais durante a escalada? <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-cg qwiz-cg2">
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Medo de cair"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">😰</div><div class="qwiz-cl">Medo de cair</div><div class="qwiz-cs">Mesmo em situações seguras</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Julgamento dos outros"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">👀</div><div class="qwiz-cl">Julgamento dos outros</div><div class="qwiz-cs">Vergonha de não conseguir</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Bloqueio mental"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🧠</div><div class="qwiz-cl">Bloqueio mental</div><div class="qwiz-cs">Sei que consigo, mas travo</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Ansiedade antes de tentar"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">⚡</div><div class="qwiz-cl">Ansiedade</div><div class="qwiz-cs">Fico ansioso antes de tentar</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Desistência por frustração"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">😤</div><div class="qwiz-cl">Frustração / Desistência</div><div class="qwiz-cs">Largo tudo quando não vai</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qMedo" value="Nenhuma dessas"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">😌</div><div class="qwiz-cl">Nenhuma dessas</div><div class="qwiz-cs">Lido bem com a pressão</div></label>
+    <!-- Seção 6: Rotina e Disponibilidade -->
+    <section class="form-section">
+      <h2 class="section-title font-display">06. ROTINA E DISPONIBILIDADE</h2>
+      <div class="grid">
+        <div>
+          <label class="field-label" for="horariosPreferenciais">Horários preferenciais para treino</label>
+          <input id="horariosPreferenciais" type="text" name="horariosPreferenciais" />
+        </div>
+        <div>
+          <label class="field-label" for="restricoesHorario">Restrições de horário (trabalho, estudo)</label>
+          <textarea id="restricoesHorario" name="restricoesHorario" rows="2"></textarea>
+        </div>
+        <div>
+          <label class="field-label" for="preferenciaAula">Preferência de aula (online, presencial, híbrido)</label>
+          <input id="preferenciaAula" type="text" name="preferenciaAula" />
         </div>
       </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Quando erra um movimento que já fez antes, como você reage?</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qErro" value="Me irrito"/>Me irrito</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qErro" value="Aceito e tento de novo"/>Aceito e tento de novo</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qErro" value="Desanimo e paro"/>Desanimo e paro</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qErro" value="Analiso e ajusto"/>Analiso e ajusto</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qErro" value="Depende do dia"/>Depende do dia</label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Como você se vê como atleta?</label>
-        <div class="qwiz-cg qwiz-cg2">
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qAutoc" value="Tenho talento mas me perco na consistência"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">✨</div><div class="qwiz-cl">"Tenho talento mas me perco na consistência"</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qAutoc" value="Me esforço muito mas evoluo devagar"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🐢</div><div class="qwiz-cl">"Me esforço muito mas evoluo devagar"</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qAutoc" value="Sou disciplinado e evoluindo bem"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">📊</div><div class="qwiz-cl">"Sou disciplinado e evoluindo bem"</div></label>
-          <label class="qwiz-cc" onclick="qSelCard(this)"><input type="radio" name="qAutoc" value="Ainda estou descobrindo meu potencial"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🔍</div><div class="qwiz-cl">"Ainda estou descobrindo meu potencial"</div></label>
-        </div>
-      </div>
-      <div class="qwiz-f"><label class="qwiz-lbl">O que passa pela sua cabeça numa situação difícil na parede? <span class="qwiz-opt">opcional</span></label><textarea name="qMente" rows="2" placeholder="Ex: Fico com medo de cair, penso que não sou bom o suficiente, fico com a cabeça em branco..."></textarea></div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(5)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(5)">PRÓXIMO →</button></div>
-    </div>
+    </section>
 
-    <!-- ── STEP 6: LESÕES E SAÚDE ── -->
-    <div class="qwiz-step" data-step="6">
-      <div class="qwiz-sh"><span class="qwiz-snum">06 / 09</span><h3 class="qwiz-stitle">SAÚDE E HISTÓRICO</h3><p class="qwiz-sdesc">Fundamental para evitar relesões e prescrever o treino com segurança.</p></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Você tem ou já teve alguma dessas lesões? <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-cg qwiz-cg2">
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Polia do dedo (A2/A4)"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🫵</div><div class="qwiz-cl">Polia do dedo</div><div class="qwiz-cs">A2 ou A4 — a mais comum</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Epicondilite (cotovelo)"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">💪</div><div class="qwiz-cl">Cotovelo (epicondilite)</div><div class="qwiz-cs">Dor na parte interna/externa</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Ombro (manguito/SLAP)"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🔄</div><div class="qwiz-cl">Ombro</div><div class="qwiz-cs">Manguito, SLAP, instabilidade</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Lombar / hérnia"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🦴</div><div class="qwiz-cl">Lombar / hérnia</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Joelho"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">🦵</div><div class="qwiz-cl">Joelho</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Tornozelo / entorse"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">👟</div><div class="qwiz-cl">Tornozelo</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Sem lesões significativas"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">✅</div><div class="qwiz-cl">Sem lesões</div></label>
-          <label class="qwiz-cc" onclick="qTogCard(this)"><input type="checkbox" name="qLesoes" value="Outra"/><div class="qwiz-ck">✓</div><div class="qwiz-ci">📝</div><div class="qwiz-cl">Outra</div></label>
-        </div>
+    <!-- Seção 7: Observações Livres -->
+    <section class="form-section">
+      <h2 class="section-title font-display">07. OBSERVAÇÕES LIVRES</h2>
+      <div>
+        <label class="field-label" for="observacoes">Use este espaço para contar o que achar relevante (experiências, medos, dúvidas, etc.)</label>
+        <textarea id="observacoes" name="observacoes" rows="5"></textarea>
       </div>
-      <div class="qwiz-f"><label class="qwiz-lbl">Dor ou lesão ativa AGORA? <span class="qwiz-opt">descreva se tiver</span></label><textarea name="qLesAtual" rows="2" placeholder="Ex: Dor na polia A2 do anelar direito há 2 semanas, nível 4/10. Se não tiver, deixe em branco."></textarea></div>
-      <div class="qwiz-f"><label class="qwiz-lbl">Condição de saúde ou restrição médica <span class="qwiz-opt">opcional</span></label><textarea name="qRestric" rows="2" placeholder="Ex: hipertensão controlada, diabetes, anticoagulante..."></textarea></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Faz acompanhamento com fisioterapeuta ou médico?</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFisio" value="Sim, atualmente"/>Sim, atualmente</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFisio" value="Já fiz, não agora"/>Já fiz, não agora</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qFisio" value="Não"/>Não</label>
-        </div>
-      </div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(6)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(6)">PRÓXIMO →</button></div>
-    </div>
+    </section>
 
-    <!-- ── STEP 7: ESTILO DE VIDA ── -->
-    <div class="qwiz-step" data-step="7">
-      <div class="qwiz-sh"><span class="qwiz-snum">07 / 09</span><h3 class="qwiz-stitle">ESTILO DE VIDA</h3><p class="qwiz-sdesc">Recuperação e estilo de vida afetam diretamente a performance e a prevenção de lesões.</p></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Qualidade do sono</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qSono" value="Durmo mal quase sempre"/>Durmo mal</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qSono" value="Inconsistente"/>Inconsistente</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qSono" value="Razoável"/>Razoável</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qSono" value="Durmo bem"/>Durmo bem</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qSono" value="Excelente"/>Excelente</label>
-        </div>
-        <div class="qwiz-hint">O sono é o principal mecanismo de recuperação tendinosa. Impacta diretamente o risco de lesão.</div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Nível de estresse no dia a dia (1 = tranquilo · 5 = muito estressado)</label>
-        <div class="qwiz-scale">
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qEstresse" value="1"/>1</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qEstresse" value="2"/>2</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qEstresse" value="3"/>3</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qEstresse" value="4"/>4</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qEstresse" value="5"/>5</label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Como é sua alimentação?</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qAlim" value="Muito irregular"/>Muito irregular</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qAlim" value="Razoável"/>Razoável</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qAlim" value="Boa, com algum cuidado"/>Boa</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qAlim" value="Controlada / nutricionista"/>Controlada / nutricionista</label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Outras atividades físicas além da escalada <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Musculação"/>Musculação</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Corrida"/>Corrida</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Yoga / Pilates"/>Yoga/Pilates</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Ciclismo"/>Ciclismo</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Natação"/>Natação</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qOutrasAt" value="Nenhuma outra"/>Nenhuma outra</label>
-        </div>
-      </div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(7)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(7)">PRÓXIMO →</button></div>
-    </div>
-
-    <!-- ── STEP 8: LOCAL E DISPONIBILIDADE ── -->
-    <div class="qwiz-step" data-step="8">
-      <div class="qwiz-sh"><span class="qwiz-snum">08 / 09</span><h3 class="qwiz-stitle">LOCAL & DISPONIBILIDADE</h3><p class="qwiz-sdesc">Para adaptar o treino à sua realidade.</p></div>
-      <div class="qwiz-g2">
-        <div class="qwiz-f qwiz-c2"><label class="qwiz-lbl">Onde você treina (nome da parede / academia)</label><input type="text" name="qAcademia" placeholder="Ex: Muro do Grau, RJ Climb..." /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Cidade</label><input type="text" name="qAcadCidade" placeholder="Ex: Rio de Janeiro" /></div>
-        <div class="qwiz-f"><label class="qwiz-lbl">Treina outdoor?</label><select name="qOutdoor"><option value="">Selecione</option><option>Sim, regularmente</option><option>Raramente</option><option>Ainda não, mas quero</option><option>Não tenho interesse por enquanto</option></select></div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Equipamentos em casa <span class="qwiz-opt">pode marcar mais de um</span></label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Hangboard"/>Hangboard</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Barra fixa"/>Barra fixa</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Argolas"/>Argolas</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Caneleiras / pesos"/>Caneleiras</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Grip trainer"/>Grip trainer</label>
-          <label class="qwiz-pill" onclick="qTogPill(this)"><input type="checkbox" name="qEquip" value="Nenhum"/>Nenhum</label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Dias disponíveis para treinar por semana</label>
-        <div class="qwiz-scale">
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qDias" value="1"/>1</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qDias" value="2"/>2</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qDias" value="3"/>3</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qDias" value="4"/>4</label>
-          <label class="qwiz-sc" onclick="qSelScale(this)"><input type="radio" name="qDias" value="5+"/>5+</label>
-        </div>
-      </div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Preferência de acompanhamento</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qPrefAula" value="Presencial"/>Presencial</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qPrefAula" value="Online"/>Online</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qPrefAula" value="Híbrido"/>Híbrido</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qPrefAula" value="Só o plano de treino"/>Só o plano de treino</label>
-        </div>
-      </div>
-      <div class="qwiz-nav"><button class="qwiz-btn qwiz-prev" onclick="qBack(8)">← VOLTAR</button><button class="qwiz-btn qwiz-next" onclick="qNext(8)">PRÓXIMO →</button></div>
-    </div>
-
-    <!-- ── STEP 9: FINALIZAÇÃO ── -->
-    <div class="qwiz-step" data-step="9">
-      <div class="qwiz-sh"><span class="qwiz-snum">09 / 09</span><h3 class="qwiz-stitle">ÚLTIMA ETAPA</h3><p class="qwiz-sdesc">Tem algo que não perguntei e que o professor precisa saber?</p></div>
-      <div class="qwiz-f"><label class="qwiz-lbl">Observações livres <span class="qwiz-opt">opcional</span></label><textarea name="qObs" rows="4" placeholder="Conte o que quiser — experiências marcantes, medos, frustrações, o que te alegra na escalada, qualquer coisa que ajude a te conhecer melhor como atleta e como pessoa."></textarea></div>
-      <div class="qwiz-f">
-        <label class="qwiz-lbl">Como chegou ao @kmoonclimb?</label>
-        <div class="qwiz-pills">
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="Instagram"/>Instagram</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="TikTok"/>TikTok</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="YouTube"/>YouTube</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="Indicação"/>Indicação</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="Na academia"/>Na academia</label>
-          <label class="qwiz-pill" onclick="qSelPill(this)"><input type="radio" name="qChegou" value="Outro"/>Outro</label>
-        </div>
-      </div>
-      <hr style="border:none;border-top:1px solid rgba(255,255,255,0.08);margin:1.5rem 0"/>
-      <div id="qwizReview"></div>
-      <button class="qwiz-btn qwiz-next qwiz-submit" id="qBtnGerar" onclick="qGerar()" style="width:100%;margin-top:1rem;font-size:1rem;padding:1.1rem">
-        GERAR MEU MAPEAMENTO COMPLETO 🧗
+    <!-- Botão -->
+    <div class="btn-wrapper">
+      <button type="button" class="btn-submit font-display" id="btnGerar">
+        GERAR MAPEAMENTO COMPLETO
       </button>
-      <div class="qwiz-nav" style="margin-top:1rem"><button class="qwiz-btn qwiz-prev" onclick="qBack(9)">← VOLTAR</button><div></div></div>
     </div>
 
-  </div><!-- /qwiz-body -->
-
-  <div style="text-align:center;padding:2rem;font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:.2em;color:rgba(255,255,255,0.25)">RODRIGO ALVES · KMOONCLIMB</div>
-</div><!-- /qwiz-root -->
-
+    <!-- Rodapé -->
+    <div class="footer font-display">
+      RODRIGO ALVES | KMOONCLIMB
+    </div>
+  </div>
   </div>
 </div>
-<style>
-/* ═══ QWIZ SCOPED STYLES ═══ */
-#qwiz-root{font-family:'Barlow',sans-serif;color:#F0EDE8;background:#0f0f0f}
-.qwiz-cover{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem 2.5rem;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(255,85,0,.07) 0%,transparent 70%)}
-.qwiz-brand{font-family:'Bebas Neue','Barlow Condensed',sans-serif;font-size:2rem;letter-spacing:.2em;color:#FF5500;margin-bottom:.75rem}
-.qwiz-sub{font-size:.6rem;letter-spacing:.3em;color:#6b6b6b;margin-bottom:1.5rem;font-family:'JetBrains Mono','Barlow Condensed',monospace;text-transform:uppercase}
-.qwiz-h1{font-family:'Bebas Neue','Barlow Condensed',sans-serif;font-size:clamp(2rem,7vw,3.8rem);line-height:.95;margin-bottom:1rem;text-transform:uppercase;letter-spacing:-.01em}
-.qwiz-accent{color:#FF5500}
-.qwiz-lead-txt{color:#9A9990;font-size:.875rem;max-width:30rem;line-height:1.7}
-.qwiz-badges{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem}
-.qwiz-badge{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid rgba(255,255,255,0.1);color:#6b6b6b;font-family:'JetBrains Mono','Barlow Condensed',monospace}
-/* Progress */
-.qwiz-progress{background:#0f0f0f;border-bottom:1px solid rgba(255,255,255,0.07);padding:.65rem 1.2rem;display:flex;align-items:center;gap:.75rem}
-.qwiz-prog-bg{flex:1;height:2px;background:rgba(255,255,255,0.08)}
-.qwiz-prog-fill{height:100%;background:#FF5500;transition:width .4s ease}
-.qwiz-prog-lbl{font-size:.6rem;font-family:'JetBrains Mono','Barlow Condensed',monospace;color:#6b6b6b;white-space:nowrap}
-/* Body + Steps */
-.qwiz-body{padding:2rem 1.5rem 1rem;background:#0f0f0f}
-.qwiz-step{display:none;animation:qFadeIn .3s ease}
-.qwiz-step.active{display:block}
-@keyframes qFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.qwiz-sh{margin-bottom:1.75rem}
-.qwiz-snum{font-size:.6rem;font-family:'JetBrains Mono','Barlow Condensed',monospace;color:#FF5500;letter-spacing:.2em;display:block;margin-bottom:.4rem}
-.qwiz-stitle{font-family:'Bebas Neue','Barlow Condensed',sans-serif;font-size:1.6rem;letter-spacing:.06em;line-height:1;text-transform:uppercase;color:#F0EDE8}
-.qwiz-sdesc{margin-top:.4rem;font-size:.8rem;color:#9A9990;line-height:1.6}
-/* Fields */
-.qwiz-f{margin-bottom:1.25rem}
-.qwiz-lbl{display:block;font-size:.6rem;font-family:'JetBrains Mono','Barlow Condensed',monospace;letter-spacing:.15em;text-transform:uppercase;color:#9A9990;margin-bottom:.4rem}
-.qwiz-req{color:#FF5500}
-.qwiz-opt{font-size:.55rem;color:#6b6b6b;margin-left:.3rem}
-.qwiz-hint{font-size:.7rem;color:#6b6b6b;margin-top:.3rem;line-height:1.5}
-#qwiz-root input[type=text],#qwiz-root input[type=email],#qwiz-root input[type=tel],#qwiz-root input[type=number],#qwiz-root textarea,#qwiz-root select{width:100%;background:#161616;border:1px solid rgba(255,255,255,0.1);padding:.65rem .9rem;font-size:.875rem;color:#F0EDE8;font-family:'Barlow',sans-serif;outline:none;transition:border-color .2s;border-radius:2px}
-#qwiz-root input:focus,#qwiz-root textarea:focus,#qwiz-root select:focus{border-color:rgba(255,85,0,.5)}
-#qwiz-root select option{background:#161616}
-.qwiz-g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.qwiz-c2{grid-column:1/-1}
-@media(max-width:520px){.qwiz-g2{grid-template-columns:1fr}}
-/* Card grid */
-.qwiz-cg{display:grid;gap:.6rem;margin-top:.4rem}
-.qwiz-cg2{grid-template-columns:1fr 1fr}
-.qwiz-cg3{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:520px){.qwiz-cg2,.qwiz-cg3{grid-template-columns:1fr 1fr}}
-.qwiz-cc{position:relative;cursor:pointer;padding:.85rem;border:1px solid rgba(255,255,255,0.1);background:#161616;transition:all .15s;user-select:none;border-radius:2px;display:flex;flex-direction:column;align-items:center;gap:.3rem;text-align:center}
-.qwiz-cc:hover{border-color:rgba(255,85,0,.3);background:#1a1a1a}
-.qwiz-cc.selected{border-color:#FF5500;background:rgba(255,85,0,.1)}
-.qwiz-cc input{position:absolute;opacity:0;pointer-events:none}
-.qwiz-ci{font-size:1.5rem}
-.qwiz-cl{font-size:.75rem;font-weight:600;line-height:1.2;color:#F0EDE8}
-.qwiz-cs{font-size:.62rem;color:#9A9990;line-height:1.3}
-.qwiz-ck{position:absolute;top:.35rem;right:.35rem;width:.85rem;height:.85rem;background:#FF5500;display:none;align-items:center;justify-content:center;font-size:.5rem;color:#fff;font-weight:700}
-.qwiz-cc.selected .qwiz-ck{display:flex}
-/* Pills */
-.qwiz-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
-.qwiz-pill{cursor:pointer;padding:.38rem .85rem;border:1px solid rgba(255,255,255,0.1);font-size:.75rem;color:#9A9990;transition:all .15s;user-select:none;border-radius:99px}
-.qwiz-pill:hover{border-color:rgba(255,85,0,.4);color:#F0EDE8}
-.qwiz-pill.selected{border-color:#FF5500;background:rgba(255,85,0,.1);color:#F0EDE8}
-.qwiz-pill input{display:none}
-/* Scale buttons */
-.qwiz-scale{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem}
-.qwiz-sc{cursor:pointer;width:2.3rem;height:2.3rem;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-family:'JetBrains Mono','Barlow Condensed',monospace;color:#9A9990;transition:all .15s;user-select:none;flex-shrink:0}
-.qwiz-sc:hover{border-color:rgba(255,85,0,.4);color:#F0EDE8}
-.qwiz-sc.selected{background:#FF5500;border-color:#FF5500;color:#fff;font-weight:700}
-.qwiz-sc input{display:none}
-/* Slider */
-.qwiz-srow{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem}
-.qwiz-sname{flex:1;min-width:0}
-.qwiz-sname-main{font-size:.8rem;font-weight:600;color:#F0EDE8}
-.qwiz-sname-sub{font-size:.62rem;color:#9A9990;margin-top:.1rem}
-.qwiz-sval{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#FF5500;width:1.6rem;text-align:center;flex-shrink:0}
-input[type=range].qwiz-range{-webkit-appearance:none;appearance:none;width:110px;flex-shrink:0;height:3px;background:rgba(255,255,255,0.1);outline:none;cursor:pointer;border:none;padding:0;background-image:linear-gradient(#FF5500,#FF5500);background-repeat:no-repeat}
-input[type=range].qwiz-range::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:#FF5500;border-radius:50%;cursor:pointer}
-input[type=range].qwiz-range::-moz-range-thumb{width:13px;height:13px;background:#FF5500;border-radius:50%;cursor:pointer;border:none}
-/* Nav */
-.qwiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.07)}
-.qwiz-btn{padding:.7rem 1.6rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:.12em;font-size:.875rem;cursor:pointer;border:none;transition:opacity .2s;border-radius:2px;text-transform:uppercase;font-weight:700}
-.qwiz-next{background:#FF5500;color:#fff}
-.qwiz-prev{background:transparent;border:1px solid rgba(255,255,255,0.15);color:#9A9990}
-.qwiz-submit{background:#FF5500;color:#fff;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
-.qwiz-btn:hover{opacity:.85}
-.qwiz-btn:disabled{opacity:.4;cursor:not-allowed}
-/* Review */
-.qwiz-rev-box{background:#161616;border:1px solid rgba(255,255,255,0.1);padding:1rem 1.25rem;margin-bottom:1rem}
-.qwiz-rev-box h4{font-size:.6rem;font-family:'JetBrains Mono',monospace;color:#FF5500;letter-spacing:.15em;margin-bottom:.65rem;text-transform:uppercase}
-.qwiz-rev-row{display:flex;gap:.5rem;font-size:.78rem;margin-bottom:.3rem}
-.qwiz-rev-k{color:#9A9990;min-width:8.5rem;flex-shrink:0}
-.qwiz-rev-v{color:#F0EDE8}
-@media(max-width:520px){.qwiz-body{padding:1.5rem 1rem 1rem}}
-</style>
-<script>
-(function(){
-var QWIZ_WA='5521981003065';
-var QWIZ_TOTAL=9;
-var qCurrent=1;
 
-var QSLIDERS=[
-  {n:'qSlPes',l:'Técnica de pés',h:'Precisão, silêncio, posicionamento dos pés'},
-  {n:'qSlLeitura',l:'Leitura de via',h:'Lê a sequência antes de tentar?'},
-  {n:'qSlForca',l:'Força de preensão',h:'Resistência e força nos agarros'},
-  {n:'qSlResist',l:'Resistência de antebraço',h:'Tempo antes de bombar?'},
-  {n:'qSlPotencia',l:'Potência / explosividade',h:'Movimentos dinâmicos, dynos'},
-  {n:'qSlMobil',l:'Mobilidade (quadril, ombros)',h:'Alto-passo, stemming, flag?'},
-  {n:'qSlEmoc',l:'Controle emocional',h:'Clareza mental sob pressão'},
-  {n:'qSlConsist',l:'Consistência de treino',h:'Mantém rotina mesmo sem motivação?'}
-];
-
-function qBuildSliders(){
-  var wrap=document.getElementById('qwizSliders');
-  if(!wrap||wrap.children.length>0)return;
-  QSLIDERS.forEach(function(s){
-    var d=document.createElement('div');
-    d.innerHTML='<div class="qwiz-srow">'
-      +'<div class="qwiz-sname"><div class="qwiz-sname-main">'+s.l+'</div><div class="qwiz-sname-sub">'+s.h+'</div></div>'
-      +'<input type="range" class="qwiz-range" name="'+s.n+'" min="1" max="10" value="5" oninput="qUpdSlider(this)" style="width:110px;flex-shrink:0"/>'
-      +'<div class="qwiz-sval" id="qsv_'+s.n+'">5</div>'
-      +'</div>';
-    wrap.appendChild(d);
-    setTimeout(function(el){return function(){qUpdSlider(el)}}(d.querySelector('input[type=range]')),50);
-  });
-}
-window.qUpdSlider=function(el){
-  var v=el.value,pct=((v-1)/9)*100;
-  el.style.backgroundSize=pct+'% 100%';
-  var lbl=document.getElementById('qsv_'+el.name);
-  if(lbl)lbl.textContent=v;
-};
-window.qSelCard=function(el){
-  var name=el.querySelector('input').name;
-  document.querySelectorAll('#qwiz-root input[name="'+name+'"]').forEach(function(i){i.closest('.qwiz-cc').classList.remove('selected')});
-  el.classList.add('selected');el.querySelector('input').checked=true;
-};
-window.qTogCard=function(el){
-  el.classList.toggle('selected');el.querySelector('input').checked=el.classList.contains('selected');
-};
-window.qSelPill=function(el){
-  var name=el.querySelector('input').name;
-  document.querySelectorAll('#qwiz-root input[name="'+name+'"]').forEach(function(i){i.closest('.qwiz-pill').classList.remove('selected')});
-  el.classList.add('selected');el.querySelector('input').checked=true;
-};
-window.qTogPill=function(el){
-  el.classList.toggle('selected');el.querySelector('input').checked=el.classList.contains('selected');
-};
-window.qSelScale=function(el){
-  var name=el.querySelector('input').name;
-  document.querySelectorAll('#qwiz-root input[name="'+name+'"]').forEach(function(i){i.closest('.qwiz-sc').classList.remove('selected')});
-  el.classList.add('selected');el.querySelector('input').checked=true;
-};
-function qShowStep(n){
-  document.querySelectorAll('.qwiz-step').forEach(function(s){s.classList.remove('active')});
-  var target=document.querySelector('.qwiz-step[data-step="'+n+'"]');
-  if(target)target.classList.add('active');
-  var prog=document.getElementById('qwizProgress');
-  if(prog)prog.style.display='flex';
-  var fill=document.getElementById('qwizFill');
-  if(fill)fill.style.width=(((n-1)/(QWIZ_TOTAL-1))*100)+'%';
-  var lbl=document.getElementById('qwizLbl');
-  if(lbl)lbl.textContent=n+' / '+QWIZ_TOTAL;
-  qCurrent=n;
-  var modal=document.getElementById('form-modal');
-  if(modal)modal.scrollTop=0;
-  if(n===9)qBuildReview();
-  if(n===4)qBuildSliders();
-}
-window.qNext=function(from){
-  if(from===1){var nm=document.getElementById('qNome');if(!nm||!nm.value.trim()){alert('Por favor, preencha seu nome.');return;}}
-  qShowStep(from+1);
-};
-window.qBack=function(from){qShowStep(from-1);};
-function qCollect(){
-  var d={};
-  document.querySelectorAll('#qwiz-root input[type=text],#qwiz-root input[type=email],#qwiz-root input[type=tel],#qwiz-root input[type=number],#qwiz-root textarea,#qwiz-root select').forEach(function(el){
-    if(!el.name||el.type==='radio'||el.type==='checkbox')return;
-    d[el.name]=el.value.trim();
-  });
-  document.querySelectorAll('#qwiz-root input[type=range]').forEach(function(el){d[el.name]=el.value;});
-  document.querySelectorAll('#qwiz-root input[type=radio]:checked').forEach(function(el){d[el.name]=el.value;});
-  var cbMap={};
-  document.querySelectorAll('#qwiz-root input[type=checkbox]:checked').forEach(function(el){if(!cbMap[el.name])cbMap[el.name]=[];cbMap[el.name].push(el.value);});
-  Object.keys(cbMap).forEach(function(k){d[k]=cbMap[k].join(', ');});
-  return d;
-}
-function qBuildReview(){
-  var d=qCollect();
-  var sec=document.getElementById('qwizReview');
-  if(!sec)return;
-  sec.innerHTML='';
-  var sections=[
-    {t:'IDENTIFICAÇÃO',keys:[['qNome','Nome'],['qIdade','Idade'],['qCidade','Cidade'],['qAltura','Altura (cm)'],['qPeso','Peso (kg)']]},
-    {t:'EXPERIÊNCIA',keys:[['qTempo','Tempo escalando'],['qEstilo','Estilo'],['qFreq','Frequência']]},
-    {t:'OBJETIVOS',keys:[['qMotiv','Motivação'],['qObj3m','Objetivo 3 meses']]},
-    {t:'MENTALIDADE',keys:[['qMedo','Bloqueios'],['qErro','Reação ao erro'],['qAutoc','Autoconceito']]},
-    {t:'SAÚDE',keys:[['qLesoes','Histórico lesões'],['qFisio','Fisioterapia']]},
-    {t:'VIDA',keys:[['qSono','Sono'],['qEstresse','Estresse (1-5)'],['qAlim','Alimentação']]}
-  ];
-  sections.forEach(function(s){
-    var rows=s.keys.filter(function(k){return d[k[0]]&&d[k[0]]!==''}).map(function(k){return '<div class="qwiz-rev-row"><div class="qwiz-rev-k">'+k[1]+'</div><div class="qwiz-rev-v">'+d[k[0]]+'</div></div>';}).join('');
-    if(!rows)return;
-    sec.innerHTML+='<div class="qwiz-rev-box"><h4>'+s.t+'</h4>'+rows+'</div>';
-  });
-}
-window.qGerar=function(){
-  var nomeEl=document.getElementById('qNome');
-  var nome=nomeEl?nomeEl.value.trim():'';
-  if(!nome){alert('Por favor, volte e preencha seu nome.');return;}
-  var d=qCollect();
-  var btn=document.getElementById('qBtnGerar');
-  if(btn){btn.disabled=true;btn.textContent='GERANDO...';}
-  try{
-    var jsPDF=window.jspdf&&window.jspdf.jsPDF;
-    if(!jsPDF)throw new Error('jsPDF não carregado');
-    var doc=new jsPDF();
-    var pw=doc.internal.pageSize.getWidth();
-    var y=18,ml=18,mw=pw-36;
-    var aP=function(){doc.addPage();y=18;};
-    var cY=function(n){if(y+(n||15)>280)aP();};
-    var ttl=function(t){cY(12);doc.setFontSize(17);doc.setFont('helvetica','bold');doc.text(t,pw/2,y,{align:'center'});y+=8;};
-    var sec=function(t){cY(14);y+=4;doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(t,ml,y);y+=2;doc.setLineWidth(.3);doc.line(ml,y,pw-ml,y);y+=6;};
-    var fld=function(lbl,val){cY(10);doc.setFontSize(8.5);doc.setFont('helvetica','bold');doc.text(lbl+':',ml,y);doc.setFont('helvetica','normal');var lines=doc.splitTextToSize(val||'Não informado',mw-4);doc.text(lines,ml+2,y+4.5);y+=4.5+lines.length*4.2;};
-    ttl('MAPEAMENTO DO ATLETA — KMOON CLIMB');
-    doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100);
-    doc.text('Gerado em '+new Date().toLocaleDateString('pt-BR'),pw/2,y,{align:'center'});y+=8;doc.setTextColor(0);
-    sec('DADOS PESSOAIS');
-    fld('Nome',d.qNome);fld('Idade',d.qIdade);fld('WhatsApp',d.qWA);fld('E-mail',d.qEmail);fld('Cidade/UF',d.qCidade);
-    fld('Altura / Peso',(d.qAltura||'—')+'cm / '+(d.qPeso||'—')+'kg'+(d.qEnvergadura?' · Envergadura: '+d.qEnvergadura+'cm':''));
-    sec('EXPERIÊNCIA');
-    fld('Tempo de escalada',d.qTempo);fld('Estilo preferido',d.qEstilo);fld('Frequência',d.qFreq);
-    sec('OBJETIVOS E MOTIVAÇÃO');
-    fld('Motivação',d.qMotiv);fld('Objetivo 3 meses',d.qObj3m);fld('Objetivo longo prazo',d.qObjLongo);
-    sec('AUTOAVALIAÇÃO TÉCNICA (1-10)');
-    var skeys=[['qSlPes','Técnica de pés'],['qSlLeitura','Leitura de via'],['qSlForca','Força preensão'],['qSlResist','Resistência antebraço'],['qSlPotencia','Potência'],['qSlMobil','Mobilidade'],['qSlEmoc','Controle emocional'],['qSlConsist','Consistência']];
-    skeys.forEach(function(k){fld(k[1],d[k[0]]);});
-    sec('MENTALIDADE E PSICOLOGIA');
-    fld('Bloqueios / medos',d.qMedo);fld('Reação ao erro',d.qErro);fld('Autoconceito',d.qAutoc);fld('Mente sob desafio',d.qMente);
-    sec('SAÚDE E LESÕES');
-    fld('Histórico de lesões',d.qLesoes);fld('Lesões ativas',d.qLesAtual);fld('Restrições médicas',d.qRestric);fld('Acompanhamento',d.qFisio);
-    sec('ESTILO DE VIDA');
-    fld('Qualidade do sono',d.qSono);fld('Estresse (1-5)',d.qEstresse);fld('Alimentação',d.qAlim);fld('Outras atividades',d.qOutrasAt);
-    sec('LOCAL E DISPONIBILIDADE');
-    fld('Parede / Academia',(d.qAcademia||'—')+' · '+(d.qAcadCidade||'—'));
-    fld('Treina outdoor',d.qOutdoor);fld('Equipamentos em casa',d.qEquip);
-    fld('Dias disponíveis',d.qDias);fld('Preferência de aula',d.qPrefAula);
-    sec('OBSERVAÇÕES');
-    fld('Observações livres',d.qObs||'Nenhuma.');fld('Como chegou ao KMoon',d.qChegou);
-    cY(10);doc.setFontSize(7.5);doc.setFont('helvetica','normal');doc.setTextColor(120);
-    doc.text('RODRIGO ALVES · KMOONCLIMB · kmoonclimb@gmail.com',pw/2,y+8,{align:'center'});
-    var fileName='Mapeamento_'+nome.replace(/\s+/g,'_')+'.pdf';
-    doc.save(fileName);
-    var aval=skeys.map(function(k){return k[1].split(' ')[0]+': '+(d[k[0]]||'—')+'/10';}).join(' · ');
-    var msg=[
-      '🧗 *MAPEAMENTO DO ATLETA — KMOON CLIMB*','',
-      '*Nome:* '+(d.qNome||'—'),' *Idade:* '+(d.qIdade||'—')+' | *Cidade:* '+(d.qCidade||'—'),
-      '*Altura/Peso:* '+(d.qAltura||'—')+'cm / '+(d.qPeso||'—')+'kg',
-      '*WhatsApp:* '+(d.qWA||'—')+' | *Email:* '+(d.qEmail||'—'),'',
-      '*⏱ Experiência:* '+(d.qTempo||'—'),
-      '*🎯 Estilo:* '+(d.qEstilo||'—'),
-      '*📅 Frequência:* '+(d.qFreq||'—'),'',
-      '*🎯 Objetivo (3m):* '+(d.qObj3m||'—'),
-      '*💡 Motivação:* '+(d.qMotiv||'—'),'',
-      '*📊 AUTOAVALIAÇÃO:*',aval,'',
-      '*🧠 MENTALIDADE:*',
-      'Bloqueios: '+(d.qMedo||'—'),
-      'Reação ao erro: '+(d.qErro||'—'),
-      'Autoconceito: '+(d.qAutoc||'—'),'',
-      '*🩺 SAÚDE:*',
-      'Lesões: '+(d.qLesoes||'—'),
-      'Lesões ativas: '+(d.qLesAtual||'Nenhuma'),
-      'Fisioterapia: '+(d.qFisio||'—'),'',
-      '*💤 VIDA:*',
-      'Sono: '+(d.qSono||'—')+' | Estresse: '+(d.qEstresse||'—')+'/5',
-      'Alimentação: '+(d.qAlim||'—'),'',
-      '*🏋️ Equipamentos:* '+(d.qEquip||'Nenhum'),
-      '*📍 Local:* '+(d.qAcademia||'—')+' — '+(d.qAcadCidade||'—'),
-      '*📅 Dias disponíveis:* '+(d.qDias||'—')+'/semana','',
-      d.qObs?'*💬 Obs:* '+d.qObs:'',
-      '_PDF "'+fileName+'" salvo no dispositivo._'
-    ].filter(function(l){return l!==undefined;}).join('\n');
-    window.open('https://wa.me/'+QWIZ_WA+'?text='+encodeURIComponent(msg),'_blank');
-  }catch(err){
-    console.error(err);
-    alert('Erro ao gerar PDF. Tente novamente.');
-  }finally{
-    if(btn){btn.disabled=false;btn.innerHTML='GERAR MEU MAPEAMENTO COMPLETO 🧗';}
-  }
-};
-})();
-</script>
-
-@media(max-width:640px){
-  #countdown-bar:not(.minimized){gap:.5rem;padding:0 3vw;flex-wrap:nowrap;overflow:hidden}
-  #cd-promo-label{display:none!important}
-  .cd-block{min-width:36px;padding:3px 5px}
-  .cd-num{font-size:1.1rem}
-  nav{padding:0 4vw}
-  nav ul{gap:.8rem}
-  nav ul li a{font-size:.6rem}
-  #countdown-bar button[onclick="openFormModal()"]{font-size:.65rem;padding:5px 10px}
-}
-
-/* ── COUNTDOWN MINIMIZADO ── */
-#countdown-bar.minimized{height:8px!important;overflow:hidden;cursor:pointer;padding:0!important}
-#countdown-bar.minimized > *{display:none!important}
-#countdown-bar.minimized::after{
-  content:'▼';
-  display:block;width:100%;height:8px;
-  background:#FF5500;color:#fff;
-  font-size:6px;line-height:8px;
-  text-align:center;cursor:pointer;
-}
-#countdown-bar.minimized + /* removed conflicting nav top */
-body.cd-minimized{padding-top:72px!important}
-html.cd-minimized{scroll-padding-top:72px!important}
-
-
-#countdown-bar.minimized + nav{top:8px!important}
-
-
-/* Mockup visual do ebook */
-.ebook-mockup {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.ebook-cover {
-  width: 260px;
-  height: 340px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0d1a0d 60%, #1a0d00 100%);
-  border: 1px solid rgba(255,85,0,0.3);
-  border-radius: 4px 12px 12px 4px;
-  box-shadow:
-    -6px 6px 0 rgba(0,0,0,0.6),
-    0 20px 60px rgba(255,85,0,0.15),
-    0 0 0 1px rgba(255,85,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transform: rotate(-2deg);
-  transition: transform .3s var(--ease-spring);
-}
-.ebook-cover:hover { transform: rotate(0deg) scale(1.03); }
-.ebook-cover::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--orange);
-}
-.ebook-cover-tag {
-  font-family: var(--fh);
-  font-size: .6rem;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: .75rem;
-}
-.ebook-cover-num {
-  font-family: var(--fh);
-  font-weight: 900;
-  font-size: 4.5rem;
-  line-height: 1;
-  color: var(--orange);
-  text-shadow: 0 0 40px rgba(255,85,0,0.5);
-}
-.ebook-cover-erros {
-  font-family: var(--fh);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: .1em;
-  color: var(--text);
-  margin-bottom: .5rem;
-}
-.ebook-cover-sub {
-  font-size: .65rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.ebook-cover-author {
-  position: absolute;
-  bottom: 1.2rem;
-  font-family: var(--fh);
-  font-size: .65rem;
-  letter-spacing: .15em;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-}
-.ebook-badge-free {
-  position: absolute;
-  top: -10px; right: -10px;
-  background: #22c55e;
-  color: #fff;
-  font-family: var(--fh);
-  font-weight: 900;
-  font-size: .7rem;
-  letter-spacing: .1em;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transform: rotate(8deg);
-  box-shadow: 0 4px 12px rgba(34,197,94,0.4);
-}
-
-/* Content side */
-.ebook-tag {
-  display: inline-block;
-  font-family: var(--fh);
-  font-weight: 700;
-  font-size: .65rem;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--orange);
-  border: 1px solid rgba(255,85,0,0.3);
-  padding: 5px 14px;
-  margin-bottom: 1.5rem;
-}
-.ebook-title {
-  font-family: var(--fh);
-  font-weight: 900;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  letter-spacing: -.01em;
-}
-.ebook-lead {
-  color: var(--muted);
-  font-size: .95rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  max-width: 480px;
-}
-.ebook-list {
-  list-style: none;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-}
-.ebook-list li {
-  display: flex;
-  gap: .75rem;
-  align-items: flex-start;
-  font-size: .9rem;
-  line-height: 1.5;
-  color: var(--text);
-}
-.ebook-list li::before {
-  content: '✓';
-  color: var(--orange);
-  font-weight: 900;
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.ebook-price-block {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-.ebook-price-old {
-  font-family: var(--fh);
-  font-size: 1.1rem;
-  color: var(--muted);
-  text-decoration: line-through;
-}
-.ebook-price-new {
-  font-family: var(--fh);
-  font-weight: 900;
-  font-size: 2.4rem;
-  color: #22c55e;
-  line-height: 1;
-}
-.ebook-price-label {
-  font-size: .7rem;
-  color: var(--muted);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.ebook-guarantee {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  font-size: .78rem;
-  color: var(--muted);
-  margin-bottom: 2rem;
-}
-.ebook-guarantee-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(34,197,94,.12);
-  border: 1px solid rgba(34,197,94,.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .9rem;
-  flex-shrink: 0;
-}
-.ebook-ctas {
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
-  max-width: 420px;
-}
-.btn-ebook-wa {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .6rem;
-  background: #25D366;
-  color: #fff;
-  font-family: var(--fh);
-  font-weight: 700;
-  font-size: .9rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 16px 28px;
-  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
-  transition: background .2s, transform .15s;
-  border: none;
-  cursor: pointer;
-}
-.btn-ebook-wa:hover { background: #1EB857; transform: translateY(-2px); }
-.btn-ebook-kiwify {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .6rem;
-  background: transparent;
-  color: var(--orange);
-  font-family: var(--fh);
-  font-weight: 700;
-  font-size: .85rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 14px 28px;
-  border: 1px solid rgba(255,85,0,0.4);
-  clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
-  transition: background .2s, border-color .2s;
-}
-.btn-ebook-kiwify:hover { background: rgba(255,85,0,0.08); border-color: var(--orange); }
-.ebook-social-proof {
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  font-size: .78rem;
-  color: var(--muted);
-}
-.ebook-stars { color: #facc15; letter-spacing: .05em; }
-
-
-
-</style>
 
 <!-- C3: Nav mobile - barra sticky no rodapé -->
 <nav class="mobile-nav-bar" aria-label="Navegação rápida">
