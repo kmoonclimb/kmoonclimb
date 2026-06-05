@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KMoon Climb | Escalada · Botafogo RJ</title>
+<title>KMoon Climb</title>
 <meta name="description" content="Ex-atleta CDE, +200 alunos formados. Aulas de escalada individuais e em grupo, indoor e outdoor, em Botafogo RJ. Sua 1ª aula com 40% OFF.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@ nav{position:fixed!important;top:52px!important;left:0!important;right:0!importa
 
 /* HERO */
 #hero{min-height:calc(100vh - var(--bars-h));display:flex;flex-direction:column;justify-content:flex-end;padding:0 5vw 8vh;position:relative;overflow:hidden}
-.hero-photo{position:absolute;inset:0;background-size:160%;background-position:68% 8%;z-index:0}
+.hero-photo{position:absolute;inset:0;background-size:cover;background-position:50% 25%;background-repeat:no-repeat;z-index:0}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,10,0.3) 0%,rgba(10,10,10,0.55) 40%,rgba(10,10,10,0.97) 100%)}
 .hero-grid-bg{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(255,85,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,0,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(180deg,transparent 0%,black 30%,black 70%,transparent 100%)}
 .hero-content{position:relative;z-index:3}
@@ -287,7 +287,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 
   /* HERO */
   #hero{padding:0 4vw 5vh}
-  .hero-photo{background-size:220%;background-position:65% 5%}
+  .hero-photo{background-size:800%;background-position:45% 40%}
   h1.hero-title{font-size:clamp(3.5rem,18vw,6rem)}
   .hero-sub{font-size:1rem;max-width:100%}
   .hero-actions{flex-direction:column;align-items:flex-start;gap:.75rem}
@@ -356,7 +356,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
   h1.hero-title{font-size:clamp(3rem,20vw,5rem)}
   .hstat{min-width:100%}
   .plans-notice{padding:1rem 1rem}
-  .hero-photo{background-size:260%;background-position:62% 5%}
+  .hero-photo{background-size:800%;background-position:45% 38%}
 }
 
 
@@ -398,6 +398,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 <meta property="og:description" content="Ex-atleta militar CDE, +200 alunos formados. Método real de leitura de vias. Aulas individuais e em grupo, indoor e outdoor. 1ª aula com 40% OFF — vagas limitadas.">
 <meta property="og:image" content="https://aws-assets.kiwify.com.br/HIqoYfft5tXcR2D/CAPA-EBOOK_02ef8bb131b4467eaad21efef7a4b82f.jpg">
 <meta property="og:image:width" content="1200">
+<meta property="og:image:alt" content="KMoon Climb · Escalada · Botafogo RJ">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
@@ -406,13 +407,16 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 <meta name="twitter:description" content="Ex-atleta CDE, +200 alunos. Método de escalada real. 1ª aula com 40% OFF.">
 <meta name="twitter:image" content="https://aws-assets.kiwify.com.br/HIqoYfft5tXcR2D/CAPA-EBOOK_02ef8bb131b4467eaad21efef7a4b82f.jpg">
 <meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="MU3PfCVSgztxgkRG-JU7QL36jAAgAcxF2beZ">
+<link rel="canonical" href="https://kmoonclimb.com.br/">
+<meta property="og:url" content="https://kmoonclimb.com.br/">
 <meta name="keywords" content="escalada Rio de Janeiro, aulas de escalada Botafogo, KMoon Climb, escalada indoor, escalada outdoor RJ">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23FF5500'/><text x='50%25' y='50%25' font-family='Arial Black' font-size='22' fill='white' text-anchor='middle' dominant-baseline='central'>K</text></svg>">
 </head>
 <body>
 
 <!-- COUNTDOWN BAR -->
-<div id="countdown-bar" style="background:#FF5500;padding:0 5vw;height:52px;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:nowrap">
+<div id="countdown-bar" style="background:#FF5500;padding:0 3vw;height:52px;display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:nowrap;overflow:hidden;box-sizing:border-box;width:100%">
   <span id="season-badge"></span>
   <span id="cd-promo-label" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:8px">
     <span style="font-size:1rem" id="cd-emoji">🔥</span> <span id="cd-text">PROMOÇÃO 40% OFF VÁLIDA POR:</span>
@@ -434,6 +438,17 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 .cd-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#fff;line-height:1;transition:opacity .1s}
 .cd-num.flip{opacity:.4}
 .cd-lbl{font-family:'Barlow Condensed',sans-serif;font-size:.45rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.65);margin-top:2px}
+@media(max-width:600px){
+  #cd-promo-label{display:none!important}
+  .cd-block{padding:3px 7px;min-width:36px}
+  .cd-num{font-size:1.1rem}
+  #countdown-bar{gap:.5rem!important;padding:0 2vw!important}
+}
+@media(max-width:380px){
+  .cd-block{padding:3px 5px;min-width:30px}
+  .cd-num{font-size:1rem}
+  #countdown-bar button:last-child{display:none}
+}
 </style>
 
 <nav>
@@ -952,7 +967,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
       <h2 class="sec-title rv">ESCOLHA<br><span class="accent">SEU PLANO.</span></h2>
     </div>
     <div class="plans-notice rv d1">
-      <p><strong>40% OFF na 1ª compra</strong>, válido para Aula Avulsa, Mensal Livre e Mensal Start.<br>
+      <p><strong>Descontos na 1ª compra:</strong> Aula Avulsa / Dupla / Trio / Squad — 40% OFF. Mensal Livre — 30% OFF. Mensal Start / Mini Moon / Mini Moon Dupla — 25% OFF.<br>
       1 desconto por CPF. Não acumulável. Planos mensais Pro, Elite e Signature não têm desconto de entrada.</p>
     </div>
   </div>
@@ -1211,7 +1226,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
       <div class="faq-a">Cancelamentos com mais de 24h de antecedência: sem custo, a aula retorna ao seu saldo. Menos de 24h: a aula é consumida. No-show na 2ª ocorrência implica pagamento antecipado obrigatório.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">O desconto de 40% é automático? <span class="faq-arrow">▾</span></div>
+      <div class="faq-q">Como funcionam os descontos de entrada? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Sim, válido para a 1ª compra de Aula Avulsa, Mensal Livre e Mensal Start. Limite de 1 desconto por CPF. Planos Pro, Elite e Signature não possuem desconto de entrada.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
@@ -1254,12 +1269,12 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
       </div>
       <div class="citem">
         <div><p class="clabel">Endereço</p>
-        <p class="cvalue" style="cursor:default">Trav. Dona Marciana, 31 · Botafogo · RJ</p></div>
+        <p class="cvalue" style="cursor:default"><a href="https://maps.google.com/?q=Travessa+Dona+Marciana+31+Botafogo+Rio+de+Janeiro" target="_blank" rel="noopener" style="color:inherit">Trav. Dona Marciana, 31 · Botafogo · RJ</a></p></div>
       </div>
     </div>
   </div>
   <div class="rv d1">
-    <img id="loc-img" src="" alt="KMoon Climb, Ginasio Botafogo" class="loc-img">
+    <img id="loc-img" src="data:," alt="KMoon Climb, Ginasio Botafogo" class="loc-img">
   </div>
 </section>
 
@@ -1297,7 +1312,7 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
     <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.15rem;color:#fff">K<span style="color:#FF5500">MOON</span> <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:.9rem">CLIMB</span></span>
   </a>
   <p class="footer-note">© 2026 KMoonClimb · Instrução Técnica de Escalada · Botafogo · Rio de Janeiro</p>
-  <p class="footer-note">@kmoonclimb · (21) 98100-3065</p>
+  <p class="footer-note"><a href="https://instagram.com/kmoonclimb" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">@kmoonclimb</a> · <a href="https://wa.me/5521981003065" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">(21) 98100-3065</a></p>
 </footer>
 
 <a href="https://wa.me/5521981003065?text=Olá+Rodrigo,+quero+saber+mais+sobre+as+aulas!" target="_blank" class="wa" aria-label="WhatsApp">
@@ -2093,10 +2108,26 @@ html.cd-minimized{scroll-padding-top:72px!important}
           'Lesões atuais: '+(lesoesAtuais||'Nenhuma'),
           'Restrições médicas: '+(restricoesMedicas||'Nenhuma'),
           'Fisioterapia: '+(acompanhamentoFisioterapia||'Não informado'),'',
-          '*--- LOCAL E EQUIPAMENTOS ---*',
-          'Academia: '+(academiaNome||'Não informado')+' ('+(academiaCidade||'-')+')',
+          '*--          '*--- LOCAL E EQUIPAMENTOS ---*',
+          'Academia: '+(academiaNome||'Não informado')+' / '+(academiaCidade||''),
           'Outdoor: '+(treinaOutdoor||'Não informado')+(localOutdoor?' - '+localOutdoor:''),
-          'Equipamentos: '+(equipamentos.length?equipamentos.join(', '):'Nenhum'),'',
+          'Equipamentos em casa: '+(equipamentos.length?equipamentos.join(', '):'Nenhum'),'',
           '*--- ROTINA ---*',
           'Horários: '+(horariosPreferenciais||'Não informado'),
-          
+          'Restrições: '+(restricoesHorario||'Nenhuma'),
+          'Preferência: '+(preferenciaAula||'Não informado'),'',
+          '*--- OBSERVAÇÕES ---*',
+          (observacoes||'Nenhuma observação adicional.')
+        ];
+
+        const waText = encodeURIComponent(msg.join('\n'));
+        setTimeout(function(){
+          window.open('https://wa.me/5521981003065?text='+waText, '_blank');
+        }, 800);
+
+      } catch(err) {
+        console.error('Erro ao gerar mapeamento:', err);
+        alert('Erro ao gerar o mapeamento. Tente novamente.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'GERAR MAPEAM
