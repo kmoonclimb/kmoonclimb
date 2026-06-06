@@ -1013,6 +1013,152 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
   </script>
 </section>
 
+<!-- LEAD MAGNET / EMAIL CAPTURE -->
+<section id="lead-magnet" style="background:var(--black);padding:6rem 5vw;position:relative;overflow:hidden">
+  <style>
+    #lead-magnet::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(255,85,0,0.07) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .lm-wrap{
+      max-width:820px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:4rem;align-items:center;
+      position:relative;z-index:1;
+    }
+    @media(max-width:700px){
+      .lm-wrap{grid-template-columns:1fr;gap:2.5rem;text-align:center}
+      .lm-mock{display:none}
+    }
+    .lm-tag{
+      font-family:var(--fh);font-weight:700;font-size:.68rem;
+      letter-spacing:.25em;text-transform:uppercase;
+      color:var(--orange);margin-bottom:.8rem;
+      display:flex;align-items:center;gap:10px
+    }
+    .lm-tag::before{content:'';display:block;width:24px;height:2px;background:var(--orange)}
+    @media(max-width:700px){.lm-tag{justify-content:center}}
+    .lm-title{
+      font-family:var(--fh);font-weight:900;
+      font-size:clamp(2.4rem,5vw,4rem);
+      line-height:.92;letter-spacing:-.02em;
+      text-transform:uppercase;color:var(--text);
+      margin-bottom:1.2rem
+    }
+    .lm-desc{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:2rem}
+    .lm-form{display:flex;flex-direction:column;gap:.75rem}
+    .lm-input{
+      background:var(--card);border:1px solid var(--border2);
+      color:var(--text);font-family:var(--fb);font-size:.95rem;
+      padding:14px 18px;outline:none;
+      transition:border-color .2s;width:100%;
+    }
+    .lm-input::placeholder{color:var(--muted)}
+    .lm-input:focus{border-color:var(--orange)}
+    .lm-btn{
+      background:var(--orange);color:#fff;
+      font-family:var(--fh);font-weight:800;font-size:1rem;
+      letter-spacing:.1em;text-transform:uppercase;
+      padding:16px 28px;border:none;cursor:pointer;
+      clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+      transition:background .2s,transform .15s;width:100%;
+    }
+    .lm-btn:hover{background:var(--orange-dim);transform:translateY(-2px)}
+    .lm-fine{font-size:.72rem;color:var(--muted);margin-top:.5rem;text-align:center}
+    /* mock book visual */
+    .lm-mock{
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+    }
+    .lm-book-shadow{
+      width:200px;height:280px;
+      background:linear-gradient(135deg,#1a1a1a,#0a0a0a);
+      border-radius:4px 14px 14px 4px;
+      box-shadow:20px 30px 60px rgba(0,0,0,.8),-6px 0 0 rgba(0,0,0,.6);
+      position:relative;overflow:hidden;
+      border:1px solid rgba(255,85,0,.2);
+    }
+    .lm-book-cover{
+      width:100%;height:100%;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      gap:1rem;padding:1.5rem;
+    }
+    .lm-book-icon{font-size:2.5rem;line-height:1}
+    .lm-book-label{
+      font-family:var(--fh);font-weight:900;font-size:1.1rem;
+      text-transform:uppercase;letter-spacing:.05em;
+      color:var(--text);text-align:center;line-height:1.1;
+    }
+    .lm-book-sub{
+      font-family:var(--fh);font-size:.65rem;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--orange);text-align:center;
+    }
+    .lm-free-badge{
+      position:absolute;top:-12px;right:-12px;
+      background:var(--orange);color:#fff;
+      font-family:var(--fh);font-weight:800;font-size:.7rem;
+      letter-spacing:.15em;text-transform:uppercase;
+      padding:8px 14px;
+      clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+    }
+  </style>
+
+  <div class="lm-wrap">
+    <!-- Texto e formulário -->
+    <div>
+      <div class="lm-tag">Ebook Grátis</div>
+      <h2 class="lm-title">OS 5 ERROS QUE<br><span style="color:var(--orange)">TRAVAM SUA</span><br>ESCALADA</h2>
+      <p class="lm-desc">Receba o guia que já ajudou mais de 200 alunos a quebrarem o platô — direto no seu e-mail, de graça.</p>
+      <form class="lm-form" action="https://api.web3forms.com/submit" method="POST" id="lm-form">
+        <input type="hidden" name="access_key" value="fc3b4a3e-f7d5-40fd-b2d6-2d9b9a62698e">
+        <input type="hidden" name="subject" value="Novo lead — Ebook Os 5 Erros">
+        <input type="hidden" name="redirect" value="false">
+        <input class="lm-input" type="text" name="name" placeholder="Seu nome" required autocomplete="name">
+        <input class="lm-input" type="email" name="email" placeholder="Seu melhor e-mail" required autocomplete="email">
+        <button class="lm-btn" type="submit">QUERO O EBOOK GRÁTIS →</button>
+        <p class="lm-fine">Zero spam. Só conteúdo de escalada que vale a pena.</p>
+      </form>
+      <div id="lm-success" style="display:none;margin-top:1rem;padding:1rem;border:1px solid var(--orange);color:var(--orange);font-family:var(--fh);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.9rem">
+        ✓ Enviado! Verifique seu e-mail em alguns minutos.
+      </div>
+    </div>
+
+    <!-- Visual do livro -->
+    <div class="lm-mock">
+      <div class="lm-book-shadow">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.3),transparent);z-index:2"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(140deg,rgba(255,255,255,.08) 0%,transparent 40%);z-index:3;pointer-events:none"></div>
+        <div class="lm-book-cover">
+          <div class="lm-book-icon">🧗</div>
+          <div class="lm-book-label">Os 5 Erros<br>que Travam<br>sua Escalada</div>
+          <div style="width:40px;height:2px;background:var(--orange);margin:.3rem 0"></div>
+          <div class="lm-book-sub">Kmoon Climb</div>
+        </div>
+        <div class="lm-free-badge">GRÁTIS</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var form = document.getElementById('lm-form');
+    var success = document.getElementById('lm-success');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch('https://api.web3forms.com/submit', {method:'POST',body:data,headers:{'Accept':'application/json'}})
+        .then(function(r){ return r.json(); })
+        .then(function(json){
+          if(json.success){ form.style.display='none'; success.style.display='block'; }
+        }).catch(function(){});
+    });
+  })();
+  </script>
+</section>
+
 <!-- PLANS -->
 <section id="plans" style="position:relative">
   <div class="plans-header">
