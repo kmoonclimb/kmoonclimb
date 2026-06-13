@@ -30,7 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 html{scroll-behavior:smooth;scroll-padding-top:var(--bars-h);overflow-x:hidden}
 body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden;padding-top:var(--bars-h)}
 img{max-width:100%;height:auto}
-#countdown-bar{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:9999!important;height:52px;overflow:hidden}
+#countdown-bar{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:9999!important}
 
 #hero{padding-top:4vh!important}
 
@@ -287,11 +287,8 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
    RESPONSIVE — mobile (≤ 600 px)
    ══════════════════════════════════════════ */
 @media(max-width:600px){
-  /* ROOT HEIGHTS: thinner countdown on small screens */
-  :root{--cd-h:44px;--bars-h:108px}
-  body{padding-top:var(--bars-h)}
-  #countdown-bar{height:44px}
-  nav{top:44px!important}
+  /* ROOT HEIGHTS: countdown is taller on mobile (2 rows) */
+  /* Overridden by countdown-specific media queries above */
 
   /* NAV */
   nav{padding:0 4vw;height:64px}
@@ -407,6 +404,11 @@ footer{padding:2.5rem 5vw;border-top:1px solid var(--border);display:flex;align-
 #countdown-bar.season-maes      { background: #9b1c4e; }
 #countdown-bar.season-pais      { background: #0a4a6b; }
 
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
 </style>
 <meta property="og:title" content="Pare de Travar na Parede — KMoon Climb · Botafogo RJ">
 <meta property="og:description" content="Ex-atleta militar CDE, +200 alunos formados. Método real de leitura de vias. Aulas individuais e em grupo, indoor e outdoor. 1ª aula com 40% OFF — vagas limitadas.">
@@ -457,38 +459,138 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- COUNTDOWN BAR -->
-<div id="countdown-bar" style="background:#FF5500;padding:0 3vw;height:52px;display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:nowrap;overflow:hidden;box-sizing:border-box;width:100%">
-  <span id="season-badge"></span>
-  <span id="cd-promo-label" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:8px">
-    <span style="font-size:1rem" id="cd-emoji">🔥</span> <span id="cd-text">PROMOÇÃO 40% OFF VÁLIDA POR:</span>
-  </span>
-  <div style="display:flex;gap:8px;align-items:center" id="countdown-digits">
-    <div class="cd-block"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">DIAS</span></div>
-    <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;color:#fff;opacity:.7">:</span>
-    <div class="cd-block"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">HORAS</span></div>
-    <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;color:#fff;opacity:.7">:</span>
-    <div class="cd-block"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">MIN</span></div>
-    <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;color:#fff;opacity:.7">:</span>
-    <div class="cd-block"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">SEG</span></div>
+<div id="countdown-bar" style="background:#FF5500;box-sizing:border-box;width:100%">
+  <div id="cd-inner">
+    <span id="season-badge"></span>
+    <span id="cd-promo-label">
+      <span id="cd-emoji">🔥</span> <span id="cd-text">PROMOÇÃO 40% OFF VÁLIDA POR:</span>
+    </span>
+    <div id="countdown-digits">
+      <div class="cd-block"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">DIAS</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">HORAS</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">MIN</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">SEG</span></div>
+    </div>
+    <button class="cd-cta-btn" onclick="openFormModal()">GARANTIR AGORA ↗</button>
+    <button id="cd-toggle" onclick="toggleCountdown()" title="Minimizar" aria-label="Minimizar barra">▲</button>
   </div>
-  <button onclick="openFormModal()" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.35);padding:7px 16px;cursor:pointer;white-space:nowrap">GARANTIR AGORA ↗</button>
-  <button id="cd-toggle" onclick="toggleCountdown()" title="Minimizar" style="background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:1rem;padding:4px 6px;line-height:1;flex-shrink:0" aria-label="Minimizar barra">▲</button>
 </div>
 <style>
-.cd-block{display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.3);padding:4px 10px;min-width:46px;border:1px solid rgba(255,255,255,.15)}
+/* ── COUNTDOWN LAYOUT ── */
+#countdown-bar{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:9999!important;overflow:visible}
+#cd-inner{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:nowrap;
+  gap:.6rem;
+  padding:0 2vw;
+  height:52px;
+  width:100%;
+  box-sizing:border-box;
+}
+#cd-promo-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:.85rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+#cd-emoji{font-size:1rem}
+#countdown-digits{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.cd-sep{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:1.4rem;
+  color:#fff;
+  opacity:.7;
+  flex-shrink:0;
+}
+.cd-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:rgba(0,0,0,.3);
+  padding:4px 10px;
+  min-width:46px;
+  border:1px solid rgba(255,255,255,.15);
+  flex-shrink:0;
+}
 .cd-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#fff;line-height:1;transition:opacity .1s}
 .cd-num.flip{opacity:.4}
 .cd-lbl{font-family:'Barlow Condensed',sans-serif;font-size:.45rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.65);margin-top:2px}
-@media(max-width:600px){
-  #cd-promo-label{display:none!important}
-  .cd-block{padding:3px 7px;min-width:36px}
-  .cd-num{font-size:1.1rem}
-  #countdown-bar{gap:.5rem!important;padding:0 2vw!important}
+.cd-cta-btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:.78rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#fff;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.35);
+  padding:7px 14px;
+  cursor:pointer;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+#cd-toggle{
+  background:none;
+  border:none;
+  color:rgba(255,255,255,.7);
+  cursor:pointer;
+  font-size:1rem;
+  padding:4px 6px;
+  line-height:1;
+  flex-shrink:0;
+}
+/* ── MOBILE: duas linhas ── */
+@media(max-width:640px){
+  :root{--cd-h:76px!important;--bars-h:140px!important}
+  body{padding-top:140px!important}
+  #countdown-bar{height:auto!important}
+  #cd-inner{
+    flex-direction:column;
+    gap:.2rem;
+    padding:6px 4vw;
+    height:auto;
+    min-height:76px;
+    justify-content:center;
+    position:relative;
+  }
+  #cd-promo-label{
+    font-size:.72rem;
+    letter-spacing:.08em;
+    display:flex!important;
+  }
+  #cd-emoji{font-size:.85rem}
+  #countdown-digits{gap:5px}
+  .cd-block{padding:3px 8px;min-width:36px}
+  .cd-num{font-size:1.05rem}
+  .cd-lbl{font-size:.4rem}
+  .cd-sep{font-size:1.1rem}
+  .cd-cta-btn{display:none}
+  #cd-toggle{position:absolute;top:4px;right:4px;font-size:.75rem;padding:2px 5px}
+  nav{top:76px!important}
+  html{scroll-padding-top:140px!important}
 }
 @media(max-width:380px){
-  .cd-block{padding:3px 5px;min-width:30px}
-  .cd-num{font-size:1rem}
-  #countdown-bar button:last-child{display:none}
+  :root{--cd-h:72px!important;--bars-h:136px!important}
+  body{padding-top:136px!important}
+  #cd-inner{min-height:72px;padding:5px 3vw}
+  #cd-promo-label{font-size:.65rem}
+  .cd-block{padding:2px 6px;min-width:30px}
+  .cd-num{font-size:.95rem}
+  nav{top:72px!important}
+  html{scroll-padding-top:136px!important}
 }
 </style>
 
@@ -871,7 +973,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="eb-d-bullets" id="ebBullets"></ul>
 
       <div class="eb-d-cta-row">
-        <a href="#" class="eb-d-btn" id="ebBtn" target="_blank" rel="noopener">
+        <a href="https://pay.kiwify.com.br/AGB1Ev1" class="eb-d-btn" id="ebBtn" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           <span id="ebBtnText">Comprar Agora</span>
         </a>
@@ -1259,35 +1361,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sec-tag rv">Dúvidas Frequentes</div>
   <h2 class="sec-title rv">PERGUNTAS<br><span class="accent">& RESPOSTAS.</span></h2>
   <div class="faq-grid">
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Preciso ter experiência para começar? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Não. Todos os planos são desenvolvidos para todos os níveis, do absoluto iniciante ao avançado. Rodrigo faz o diagnóstico do seu nível na primeira aula e adapta o ensino para você.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Como funciona o agendamento? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Via WhatsApp com mínimo de 3 dias úteis de antecedência. A aula é confirmada somente após a resposta do Rodrigo. Nenhum agendamento é automático.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">E se eu precisar cancelar a aula? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Cancelamentos com mais de 24h de antecedência: sem custo, a aula retorna ao seu saldo. Menos de 24h: a aula é consumida. No-show na 2ª ocorrência implica pagamento antecipado obrigatório.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Como funcionam os descontos de entrada? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Sim, válido para a 1ª compra de Aula Avulsa, Mensal Livre e Mensal Start. Limite de 1 desconto por CPF. Planos Pro, Elite e Signature não possuem desconto de entrada.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">As aulas não usadas acumulam? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Não. Aulas não utilizadas no período (mensal ou 90 dias do pacote) não acumulam para o próximo ciclo. O Mensal Livre é válido por 90 dias a partir do pagamento.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Posso pausar meu plano mensal? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Sim. Uma pausa por ano, de até 30 dias corridos, com aviso prévio de 5 dias úteis. O plano é retomado automaticamente após o período de pausa.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Como funciona o KMoon Signature? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">São apenas 3 vagas simultâneas, não é marketing, é a capacidade real de atenção do Rodrigo. Vagas abertas 2× ao ano. Se não há vaga disponível, você entra na lista de espera. Sem desconto, sem negociação de preço.</div>
     </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)" role="button" tabindex="0">
       <div class="faq-q">Meu filho pode começar sem experiência? <span class="faq-arrow">▾</span></div>
       <div class="faq-a">Sim. Os planos Mini Moon e Moon Jr são para crianças de 6 a 17 anos sem nenhuma experiência prévia. O ensino é adaptado para cada faixa etária com foco em confiança e desenvolvimento motor.</div>
     </div>
@@ -1315,7 +1417,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="citem">
         <div><p class="clabel">Endereço</p>
-        <p class="cvalue" style="cursor:default"><a href="https://maps.google.com/?q=Travessa+Dona+Marciana+31+Botafogo+Rio+de+Janeiro" target="_blank" rel="noopener" style="color:inherit">Trav. Dona Marciana, 31 · Botafogo · RJ</a></p></div>
+        <p class="cvalue" style="cursor:default"><a href="https://maps.google.com/?q=Travessa+Dona+Marciana+31+Botafogo+Rio+de+Janeiro" target="_blank" rel="noopener noreferrer" style="color:inherit">Trav. Dona Marciana, 31 · Botafogo · RJ</a></p></div>
       </div>
     </div>
   </div>
@@ -1358,7 +1460,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.15rem;color:#fff">K<span style="color:#FF5500">MOON</span> <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:.9rem">CLIMB</span></span>
   </a>
   <p class="footer-note">© 2026 KMoonClimb · Instrução Técnica de Escalada · Botafogo · Rio de Janeiro</p>
-  <p class="footer-note"><a href="https://instagram.com/kmoonclimb" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">@kmoonclimb</a> · <a href="https://wa.me/5521981003065" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">(21) 98100-3065</a></p>
+  <p class="footer-note"><a href="https://instagram.com/kmoonclimb" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">@kmoonclimb</a> · <a href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">(21) 98100-3065</a></p>
 </footer>
 
 <a href="https://wa.me/5521981003065?text=Olá+Rodrigo,+quero+saber+mais+sobre+as+aulas!" target="_blank" rel="noopener noreferrer" class="wa" aria-label="WhatsApp">
@@ -1516,7 +1618,19 @@ function switchTab(id, btn) {
 }
 
 // FAQ
-function toggleFaq(el) { el.classList.toggle("open"); }
+function toggleFaq(el) {
+  const isOpen = el.classList.contains("open");
+  document.querySelectorAll(".faq-item").forEach(function(item) {
+    item.classList.remove("open");
+    var btn = item.querySelector("button");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  });
+  if (!isOpen) {
+    el.classList.add("open");
+    var btn = el.querySelector("button");
+    if (btn) btn.setAttribute("aria-expanded", "true");
+  }
+}
 
 // CONFETTI
 function launchConfetti(container) {
@@ -1957,16 +2071,7 @@ document.addEventListener('keydown', function(e) {
   #form-modal > div{padding:0 4px 40px}
 }
 
-@media(max-width:640px){
-  #countdown-bar:not(.minimized){gap:.5rem;padding:0 3vw;flex-wrap:nowrap;overflow:hidden}
-  #cd-promo-label{display:none!important}
-  .cd-block{min-width:36px;padding:3px 5px}
-  .cd-num{font-size:1.1rem}
-  nav{padding:0 4vw}
-  nav ul{gap:.8rem}
-  nav ul li a{font-size:.6rem}
-  #countdown-bar button[onclick="openFormModal()"]{font-size:.65rem;padding:5px 10px}
-}
+/* mobile countdown handled in cd-inner block above */
 
 /* ── COUNTDOWN MINIMIZADO ── */
 #countdown-bar.minimized{height:8px!important;overflow:hidden;cursor:pointer;padding:0!important}
