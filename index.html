@@ -30,12 +30,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 html{scroll-behavior:smooth;scroll-padding-top:var(--bars-h);overflow-x:hidden}
 body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden;padding-top:var(--bars-h)}
 img{max-width:100%;height:auto}
-#countdown-bar{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:9999!important}
 
 #hero{padding-top:4vh!important}
 
 /* NAV */
-nav{position:fixed!important;top:52px!important;left:0!important;right:0!important;z-index:9998!important;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav{position:fixed!important;top:var(--cd-h)!important;left:0!important;right:0!important;z-index:9998!important;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:rgba(10,10,10,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav-logo{text-decoration:none;display:flex;align-items:center}
 .nav-logo span{color:var(--orange)}
 .nav-links{display:flex;gap:2rem;list-style:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;padding:0}
@@ -555,7 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 /* ── MOBILE: duas linhas ── */
 @media(max-width:640px){
   :root{--cd-h:76px!important;--bars-h:140px!important}
-  body{padding-top:140px!important}
+  /* body padding-top via --bars-h var */
   #countdown-bar{height:auto!important}
   #cd-inner{
     flex-direction:column;
@@ -579,18 +578,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   .cd-sep{font-size:1.1rem}
   .cd-cta-btn{display:none}
   #cd-toggle{position:absolute;top:4px;right:4px;font-size:.75rem;padding:2px 5px}
-  nav{top:76px!important}
-  html{scroll-padding-top:140px!important}
+  /* nav top auto-adjusts via --cd-h var */
 }
 @media(max-width:380px){
   :root{--cd-h:72px!important;--bars-h:136px!important}
-  body{padding-top:136px!important}
+  /* body padding-top via --bars-h var */
   #cd-inner{min-height:72px;padding:5px 3vw}
   #cd-promo-label{font-size:.65rem}
   .cd-block{padding:2px 6px;min-width:30px}
   .cd-num{font-size:.95rem}
-  nav{top:72px!important}
-  html{scroll-padding-top:136px!important}
+  /* nav top auto-adjusts via --cd-h var */
 }
 </style>
 
@@ -1173,7 +1170,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="pcard" data-full="560" data-disc="420" data-disc-label="25% OFF · 1º Mês · Renova R$560" data-per="/mês" data-details="R$140/aula · 4 aulas/mês · 1× por semana">
         <p class="pcard-label">1x por semana. Crie o hábito.</p>
         <h3 class="pcard-name">Mensal Start</h3>
-        <p class="pcard-pitch">"Uma vez por semana. Em 3 meses você sobe vias que antes pareciam impossíveis."</p>
+        <p class="pcard-pitch">"Uma vez por semana. Em 3 meses você aprende a subir vias que antes pareciam impossíveis."</p>
         <div class="price-area"></div>
         <ul class="pcard-features">
           <li>4 aulas/mês, 1x por semana</li>
