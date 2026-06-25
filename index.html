@@ -61,10 +61,10 @@ nav{position:fixed;top:var(--cd-h);left:0;right:0;z-index:9998;height:var(--nav-
 
 /* ── HERO ── */
 #hero{min-height:calc(100vh - var(--bars-h));display:flex;flex-direction:column;justify-content:flex-end;padding:0 5vw 8vh;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#150800 50%,#0a0a0a 100%);z-index:0}
+.hero-bg{position:absolute;inset:0;background-image:url('hero-bg.jpg');background-size:cover;background-position:38% center;background-repeat:no-repeat;z-index:0}
 .hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,85,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,0,.035) 1px,transparent 1px);background-size:64px 64px}
 .hero-bg::after{content:'';position:absolute;bottom:-20%;right:-10%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(255,85,0,.08) 0%,transparent 60%);pointer-events:none}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.1) 0%,rgba(10,10,10,.4) 50%,rgba(10,10,10,.97) 100%);z-index:1}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.35) 0%,rgba(10,10,10,.6) 50%,rgba(10,10,10,.97) 100%);z-index:1}
 .hero-content{position:relative;z-index:3;max-width:900px}
 .hero-eyebrow{font-family:var(--fh);font-weight:600;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:1.5rem;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::before{content:'';display:block;width:36px;height:2px;background:var(--orange);flex-shrink:0}
@@ -516,10 +516,22 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
   .ebook-slider-track{gap:.8rem}
   .ebook-tile{flex:0 0 108px;width:108px}
   .ebook-arrow{width:28px;height:28px;font-size:1.2rem}
+  .plan-grid{grid-template-columns:1fr !important}
+  .pcard{padding:1.5rem 1.2rem}
+  .plan-tabs{flex-wrap:wrap}
+  .ptab{font-size:.95rem;padding:.9rem .8rem;flex:0 0 50%;min-width:0}
+  .ptab:last-child:nth-child(odd){flex:0 0 100%}
+  .cta-big{font-size:clamp(3rem,14vw,6rem)}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .price-full-row .price-num{font-size:2.2rem}
+  .pcard-price-wrap{min-height:60px}
 }
 @media(max-width:400px){
   .ebook-carousel-outer{padding:0 18px}
   .ebook-tile{flex:0 0 92px;width:92px}
+  .ptab{font-size:.82rem;padding:.75rem .5rem}
+  .pcard{padding:1.2rem 1rem}
+  .price-full-row .price-num{font-size:2rem}
 }
 .ebook-slider-track{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
 .ebook-slider-track::-webkit-scrollbar{display:none}
@@ -566,7 +578,8 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
 }
 .pcard.price-revealed:not(.orange-only) .price-disc-row{
   display:block;
-  animation:discReveal .52s .07s cubic-bezier(.2,.8,.3,1) both
+  animation:discReveal .52s .07s cubic-bezier(.2,.8,.3,1) both;
+  color:var(--orange)
 }
 
 /* REVEALED - card WITHOUT discount: price pops orange + bigger */
@@ -580,7 +593,8 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
   to{color:var(--orange)}
 }
 .pcard.price-revealed.orange-only .price-full-row{
-  animation:orangePop .55s cubic-bezier(.2,.8,.3,1) forwards, colorToOrange .4s .05s ease forwards
+  animation:orangePop .55s cubic-bezier(.2,.8,.3,1) forwards, colorToOrange .4s .05s ease forwards;
+  color:var(--orange)
 }
 .pcard.price-revealed.orange-only .price-full-row .price-num{font-size:3.2rem}
 .pcard.price-revealed.orange-only .price-full-row .price-cur{font-size:1.5rem}
@@ -589,7 +603,7 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
 .panel-reveal-bar{position:absolute;bottom:0;left:0;height:3px;background:var(--orange);width:0;border-radius:0;pointer-events:none;z-index:10;box-shadow:0 0 8px var(--orange)}
 
 /* CONFETTI */
-.confetti-bit{position:fixed;pointer-events:none;z-index:9999;animation:confettiRain var(--dur) ease-in forwards}
+.confetti-bit{position:fixed;pointer-events:none;z-index:9999;will-change:transform,opacity;-webkit-backface-visibility:hidden;backface-visibility:hidden;animation:confettiRain var(--dur) ease-in forwards}
 @keyframes confettiRain{
   0%{transform:translateY(0) translateX(0) rotate(0deg) scale(1);opacity:1}
   20%{opacity:1}
@@ -669,7 +683,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Instrução técnica de escalada · Botafogo, Rio de Janeiro</p>
     <h1 class="hero-title">
       <span class="line-out">Do zero</span><br>
       <span class="line-out">a vias que</span><br>
@@ -1232,8 +1245,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="cta-final">
   <div class="cta-f-eyebrow">Sua vaga está esperando</div>
   <div class="vagas-badge rv">⚡ Vagas limitadas este mês</div>
-  <h2 class="cta-big rv"><em>Sobe.</em><br>Agora.</h2>
-  <p class="cta-sub rv d1">40% OFF na primeira aula. Sem compromisso.<br>Você só precisa aparecer.</p>
+  <h2 class="cta-big rv"><em>Escalada.</em><br>Evolução.</h2>
+  <p class="cta-sub rv d1">A parede não mente. Você descobre quem é em cima dela.<br>1ª aula com 40% OFF — venha testar.</p>
   <div class="cta-actions rv d2">
     <button class="btn-primary" onclick="openModal('avulsa')" style="font-size:1.1rem;padding:20px 48px">🔥 Sim, Quero Minha Vaga com 40% OFF ↗</button>
     <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065" class="btn-ghost" target="_blank" rel="noopener noreferrer">💬 Falar direto com o Rodrigo</a>
