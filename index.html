@@ -707,7 +707,7 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
     "latitude": -22.9519,
     "longitude": -43.1862
   },
-  "priceRange": "R$320-R$780",
+  "priceRange": "R$75-R$2.800",
   "openingHours": "Mo-Sa 06:00-22:00",
   "sameAs": ["https://instagram.com/kmoonclimb"]
 }
@@ -1218,7 +1218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           '<div class="ed-trust-item"><span class="eti">&#9889;</span> Receba na hora via WhatsApp</div>'+
         '</div>'
       : '<a href="'+eb.link+'" target="_blank" rel="noopener noreferrer" class="ed-cta" style="font-size:.85rem;padding:1rem 1rem" '+
-          'onclick="try{gtag(\'event\',\'conversion\',{\'send_to\':\'AW-16775165166/ydoKCOmM970cEO7pgr8-\'});}catch(e){}">'+
+          'onclick="try{gtag(\'event\',\'conversion\',{\'send_to\':\'AW-16775165166/2hrdCM3Gj74cEO7pgr8-\'});}catch(e){}">'+
           eb.cta+'</a>'+
         '<div class="ed-trust-items">'+
           '<div class="ed-trust-item"><span class="eti">&#128737;</span> Garantia de 7 dias</div>'+
@@ -1415,32 +1415,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 // ── COUNTDOWN ──
 const WA = '5521981003065';
+// Aponta para o último instante do mês corrente (23:59:59 do último dia)
+// Persuasão psicológica: cria urgência real alinhada ao calendário
 const getDeadline = () => {
   const now = new Date();
-  const d = new Date(now);
-  const daysUntilMonday = (1 - now.getDay() + 7) % 7 || 7;
-  d.setDate(now.getDate() + daysUntilMonday);
-  d.setHours(23,59,59,0);
-  return d;
+  return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 0);
 };
-const deadline = getDeadline();
-const fmtDeadline = deadline.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
-const cdEl=document.getElementById('cd-deadline');if(cdEl)cdEl.textContent=fmtDeadline.charAt(0).toUpperCase()+fmtDeadline.slice(1);
+let deadline = getDeadline();
 
 const tick = () => {
   const now = new Date();
-  let diff = Math.max(0, deadline - now);
-  const d = Math.floor(diff/86400000); diff %= 86400000;
-  const h = Math.floor(diff/3600000); diff %= 3600000;
-  const m = Math.floor(diff/60000); diff %= 60000;
-  const s = Math.floor(diff/1000);
-  const pad = n => String(n).padStart(2,'0');
+  let diff = deadline - now;
+  // Se virou o mês, recalcula automaticamente para o novo mês
+  if (diff <= 0) {
+    deadline = getDeadline();
+    diff = Math.max(0, deadline - now);
+  }
+  const d = Math.floor(diff / 86400000); diff %= 86400000;
+  const h = Math.floor(diff / 3600000);  diff %= 3600000;
+  const m = Math.floor(diff / 60000);    diff %= 60000;
+  const s = Math.floor(diff / 1000);
+  const pad = n => String(n).padStart(2, '0');
   document.getElementById('cd-d').textContent = pad(d);
   document.getElementById('cd-h').textContent = pad(h);
   document.getElementById('cd-m').textContent = pad(m);
   document.getElementById('cd-s').textContent = pad(s);
 };
-tick(); setInterval(tick,1000);
+tick(); setInterval(tick, 1000);
 
 // ── NAV TOGGLE ──
 function toggleNav(){
@@ -1492,7 +1493,7 @@ const modalConfigs = {
   kids:{title:'Aulas Kids',offer:'Mini Moon / Moon Jr',sub:'A partir de R$380/mês',msg:'Olá Rodrigo! Tenho interesse nas aulas Kids.'},
   grupo:{title:'Aulas em Grupo',offer:'Duo · Trio · Squad',sub:'A partir de R$75/pessoa',msg:'Olá Rodrigo! Tenho interesse nas aulas em grupo.'},
   'ebook-primeiros-metros':{title:'Primeiros Metros',offer:'E-book Primeiros Metros',sub:'R$29,97',msg:'Olá Rodrigo! Quero adquirir o e-book Primeiros Metros.'},
-  'ebook-mentoria':{title:'Mentalidade do Escalador',offer:'E-book Mentalidade do Escalador',sub:'R$47,00',msg:'Olá Rodrigo! Quero adquirir o e-book Mentalidade do Escalador.'},
+  'ebook-mentoria':{title:'O Cérebro que Não Sente Medo',offer:'E-book O Cérebro que Não Sente Medo',sub:'R$29,97',msg:'Olá Rodrigo! Quero adquirir o e-book O Cérebro que Não Sente Medo.'},
 };
 let currentModalType = 'avulsa';
 
