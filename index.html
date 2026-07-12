@@ -712,6 +712,71 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
   "sameAs": ["https://instagram.com/kmoonclimb"]
 }
 </script>
+
+<!-- ── GCLID CAPTURE + URGENCY TIMER + UTM TRACKING ── -->
+<script>
+// ─── gclid capture para Google Ads offline conversion tracking ───
+(function(){
+  var url = window.location.search;
+  var gclidMatch = url.match(/[?&]gclid=([^&]+)/);
+  var utmSrc = url.match(/[?&]utm_source=([^&]+)/);
+  var utmMed = url.match(/[?&]utm_medium=([^&]+)/);
+  var utmCamp = url.match(/[?&]utm_campaign=([^&]+)/);
+  
+  window.KMOON_GCLID = gclidMatch ? decodeURIComponent(gclidMatch[1]) : null;
+  window.KMOON_UTM_SOURCE = utmSrc ? decodeURIComponent(utmSrc[1]) : null;
+  window.KMOON_UTM_MEDIUM = utmMed ? decodeURIComponent(utmMed[1]) : null;
+  window.KMOON_UTM_CAMPAIGN = utmCamp ? decodeURIComponent(utmCamp[1]) : null;
+  
+  // Store in sessionStorage for persistence across SPA
+  if(window.KMOON_GCLID) sessionStorage.setItem('kmoon_gclid', window.KMOON_GCLID);
+  if(window.KMOON_UTM_SOURCE) sessionStorage.setItem('kmoon_utm_source', window.KMOON_UTM_SOURCE);
+  if(window.KMOON_UTM_CAMPAIGN) sessionStorage.setItem('kmoon_utm_campaign', window.KMOON_UTM_CAMPAIGN);
+})();
+
+// ─── Countdown Timer para urgency bar ───
+(function(){
+  function updateTimer(){
+    var el = document.getElementById('ub-timer');
+    if(!el) return;
+    
+    // Set deadline: end of today + 3 days (creates renewable urgency)
+    var stored = sessionStorage.getItem('kmoon_deadline');
+    var deadline;
+    if(stored){
+      deadline = new Date(parseInt(stored));
+    } else {
+      deadline = new Date();
+      deadline.setDate(deadline.getDate() + 3);
+      deadline.setHours(23, 59, 59, 0);
+      sessionStorage.setItem('kmoon_deadline', deadline.getTime().toString());
+    }
+    
+    var now = new Date();
+    var diff = Math.max(0, deadline - now);
+    
+    if(diff === 0){
+      el.textContent = 'Oferta encerrando';
+      return;
+    }
+    
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    
+    if(h > 0){
+      el.textContent = 'Encerra em ' + h + 'h ' + (m<10?'0'+m:m) + 'm';
+    } else {
+      el.textContent = 'Encerra em ' + m + 'm ' + (s<10?'0'+s:s) + 's';
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function(){
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  });
+})();
+</script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -747,6 +812,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <button id="nav-toggle" aria-label="Menu" onclick="toggleNav()" aria-expanded="false">☰</button>
 </nav>
 
+
+<!-- ── URGENCY BAR (Google Ads landing optimization) ── -->
+<div id="urgency-bar" style="background:linear-gradient(90deg,#cc3300,#ff4500);color:white;text-align:center;padding:10px 16px;font-size:14px;font-weight:700;position:relative;z-index:99;letter-spacing:.3px">
+  🔥 <span id="ub-text">40% OFF na 1ª Compra • Vagas Limitadas em Botafogo</span>
+  &nbsp;·&nbsp; <a onclick="openModal('avulsa')" style="color:#ffd700;text-decoration:underline;cursor:pointer;font-weight:900">Garantir Agora ↗</a>
+  &nbsp;·&nbsp; <span id="ub-timer" style="background:rgba(0,0,0,.25);padding:2px 8px;border-radius:12px;font-size:13px">carregando...</span>
+</div>
+<!-- END URGENCY BAR -->
+
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-bg"></div>
@@ -757,7 +831,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="line-out">a vias que</span><br>
       <span class="line-out">você nunca <em>imaginou</em> subir.</span>
     </h1>
-    <p class="hero-sub">Método de ex-atleta de competição. +200 alunos treinados. Do iniciante ao avançado. No seu ritmo, com resultado real.</p>
+    <p class="hero-sub">Professor de escalada em Botafogo, RJ. Método de ex-atleta de competição. +200 alunos treinados. Do iniciante ao avançado — com resultado real.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="openModal('avulsa')">🔥 Garantir Minha Vaga com 40% OFF ↗</button>
       <a href="#ebooks" class="btn-ghost" style="border-color:rgba(255,85,0,.5);color:var(--orange)">📚 E-books ↓</a>
@@ -905,7 +979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Diagnóstico do seu nível atual</li>
           <li>Feedback técnico ao final da aula</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+Aula+Avulsa.+Pode+me+passar+os+detalhes+e+hor%C3%A1rios+dispon%C3%ADveis%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Agora</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+Aula+Avulsa.+Pode+me+passar+os+detalhes+e+hor%C3%A1rios+dispon%C3%ADveis%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Agora</a>
       </div>
       <div class="pcard" data-full="750" data-disc="525" data-disc-label="30% OFF · 1ª Compra · 1 por CPF" data-per="">
         <div class="pcard-label">5 Aulas · 90 Dias · Sem mensalidade</div>
@@ -917,7 +991,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Vídeo técnico exclusivo personalizado</li>
           <li>Feedback técnico ao final das 5 aulas</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+tenho+interesse+no+Mensal+Livre.+Como+funciona+e+quais+s%C3%A3o+os+pr%C3%B3ximos+hor%C3%A1rios%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Comprar Pacote</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+tenho+interesse+no+Mensal+Livre.+Como+funciona+e+quais+s%C3%A3o+os+pr%C3%B3ximos+hor%C3%A1rios%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Comprar Pacote</a>
       </div>
       <div class="pcard" data-full="560" data-disc="420" data-disc-label="25% OFF · 1º Mês · Renova R$560" data-per="/mês">
         <div class="pcard-label">1× por semana · Crie o hábito</div>
@@ -928,7 +1002,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>4 aulas/mês, 1x por semana</li>
           <li>Feedback mensal de progresso</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+come%C3%A7ar+no+Mensal+Start.+Pode+me+explicar+como+funciona%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Começar Agora</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+come%C3%A7ar+no+Mensal+Start.+Pode+me+explicar+como+funciona%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Começar Agora</a>
       </div>
       <div class="pcard featured" data-full="980" data-disc="0" data-disc-label="" data-per="/mês">
         <div class="pcard-badge">MAIS ESCOLHIDO</div>
@@ -943,7 +1017,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="star">Planilha de treino complementar</li>
           <li class="star">1 análise de vídeo da sua escalada/mês</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+evoluir+com+o+Mensal+Pro.+Como+funciona+e+quando+posso+come%C3%A7ar%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Quero o Mensal Pro</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+evoluir+com+o+Mensal+Pro.+Como+funciona+e+quando+posso+come%C3%A7ar%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Quero o Mensal Pro</a>
       </div>
       <div class="pcard" data-full="1380" data-disc="0" data-disc-label="" data-per="/mês">
         <div class="pcard-label">3× por Semana · Nível Atleta</div>
@@ -959,7 +1033,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="star">1 sessão outdoor a cada trimestre</li>
           <li class="star">Acesso às gravações das suas aulas</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+entrar+no+Mensal+Elite.+Pode+me+passar+as+informa%C3%A7%C3%B5es%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Quero o Elite</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+entrar+no+Mensal+Elite.+Pode+me+passar+as+informa%C3%A7%C3%B5es%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Quero o Elite</a>
       </div>
       <div class="pcard" data-full="2800" data-disc="0" data-disc-label="" data-per="/mês">
         <div class="pcard-label hl">★ Exclusivo · Apenas 3 Vagas Simultâneas</div>
@@ -976,7 +1050,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="star">2 aulas outdoor por mês</li>
           <li class="star">Kit KMoon físico na entrada</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+entrar+na+lista+de+espera+do+Signature.+Me+avise+quando+abrir+vaga%21+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Entrar na Lista de Espera</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+entrar+na+lista+de+espera+do+Signature.+Me+avise+quando+abrir+vaga%21+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Entrar na Lista de Espera</a>
       </div>
     </div>
   </div>
@@ -999,7 +1073,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Acompanhamento do desenvolvimento</li>
           <li>Relatório simples de evolução mensal</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+meu+filho%28a%29+no+Mini+Moon.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+meu+filho%28a%29+no+Mini+Moon.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular</a>
       </div>
       <div class="pcard" data-full="380" data-disc="285" data-disc-label="25% OFF · 1º Mês" data-per="/criança">
         <div class="pcard-label">2 crianças · Mesma aula · Mais econômico</div>
@@ -1012,7 +1086,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Acompanhamento do desenvolvimento</li>
           <li>Relatório mensal para os pais</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+2+crian%C3%A7as+no+Mini+Moon+Dupla.+Pode+me+passar+as+informa%C3%A7%C3%B5es%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular 2 Crianças</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+2+crian%C3%A7as+no+Mini+Moon+Dupla.+Pode+me+passar+as+informa%C3%A7%C3%B5es%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular 2 Crianças</a>
       </div>
       <div class="pcard featured" data-full="900" data-disc="0" data-disc-label="" data-per="/mês">
         <div class="pcard-badge">MAIS INDICADO</div>
@@ -1028,7 +1102,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="star">Análise de vídeo mensal</li>
           <li class="star">1 aula outdoor por trimestre</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+no+Moon+Jr.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular no Moon Jr</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+matricular+no+Moon+Jr.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Matricular no Moon Jr</a>
       </div>
     </div>
   </div>
@@ -1050,7 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Feedback técnico ao final</li>
           <li>Diagnóstico individual de nível</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+dupla.+Quais+s%C3%A3o+os+hor%C3%A1rios+dispon%C3%ADveis%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Duo</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+dupla.+Quais+s%C3%A3o+os+hor%C3%A1rios+dispon%C3%ADveis%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Duo</a>
       </div>
       <div class="pcard featured" data-full="90" data-disc="54" data-disc-label="40% OFF · 1ª Compra · 1 por CPF" data-per="/pessoa">
         <div class="pcard-badge">★ POPULAR</div>
@@ -1063,7 +1137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Feedback técnico ao final</li>
           <li class="star">Melhor relação custo-benefício</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+trio.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Trio</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+trio.+Pode+me+passar+os+detalhes%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Trio</a>
       </div>
       <div class="pcard" data-full="75" data-disc="45" data-disc-label="40% OFF · 1ª Compra · 1 por CPF" data-per="/pessoa">
         <div class="pcard-label">4 Pessoas · Melhor Custo</div>
@@ -1075,7 +1149,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Feedback técnico ao final</li>
           <li class="star">Menor preço por pessoa</li>
         </ul>
-        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+grupo.+Somos+4+pessoas.+Tem+hor%C3%A1rio+dispon%C3%ADvel%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Squad</a>
+        <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+agendar+uma+aula+em+grupo.+Somos+4+pessoas.+Tem+hor%C3%A1rio+dispon%C3%ADvel%3F+%F0%9F%A7%97" class="pcard-cta" target="_blank" rel="noopener noreferrer">Agendar Squad</a>
       </div>
     </div>
   </div>
@@ -1218,7 +1292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           '<div class="ed-trust-item"><span class="eti">&#9889;</span> Receba na hora via WhatsApp</div>'+
         '</div>'
       : '<a href="'+eb.link+'" target="_blank" rel="noopener noreferrer" class="ed-cta" style="font-size:.85rem;padding:1rem 1rem" '+
-          'onclick="try{gtag(\'event\',\'conversion\',{\'send_to\':\'AW-16775165166/2hrdCM3Gj74cEO7pgr8-\'});}catch(e){}">'+
+          'onclick="try{gtag(\'event\',\'conversion\',{\'send_to\':\'AW-16775165166/RpJdCKDT_84cEO7pgr8-\'});}catch(e){}">'+
           eb.cta+'</a>'+
         '<div class="ed-trust-items">'+
           '<div class="ed-trust-item"><span class="eti">&#128737;</span> Garantia de 7 dias</div>'+
@@ -1323,7 +1397,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p style="color:var(--muted);font-size:.95rem;margin-bottom:2rem;line-height:1.7" class="rv d1">As aulas acontecem na <strong style="color:var(--text)">Evolução Escalada Indoor</strong>, a maior academia de escalada do Rio de Janeiro.</p>
     <div class="contact-list">
       <div class="citem rv d1"><div class="citem-icon">📍</div><div><div class="clabel">Endereço</div><div class="cvalue">Trav. Dona Marciana, 31 · Botafogo<br>Rio de Janeiro, RJ · CEP 22290-000</div></div></div>
-      <div class="citem rv d2"><div class="citem-icon">📱</div><div><div class="clabel">WhatsApp</div><div class="cvalue"><a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065">(21) 98100-3065</a></div></div></div>
+      <div class="citem rv d2"><div class="citem-icon">📱</div><div><div class="clabel">WhatsApp</div><div class="cvalue"><a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065">(21) 98100-3065</a></div></div></div>
       <div class="citem rv d3"><div class="citem-icon">📸</div><div><div class="clabel">Instagram</div><div class="cvalue"><a href="https://instagram.com/kmoonclimb" target="_blank" rel="noopener noreferrer">@kmoonclimb</a></div></div></div>
       <div class="citem rv d4"><div class="citem-icon">🕐</div><div><div class="clabel">Horários do espaço (Evolução Indoor)</div><div class="cvalue"><div class="hours-grid"><span class="day">Segunda a Sexta</span><span class="time">13:00 – 22:00</span><span class="day">Sábado / Feriados</span><span class="time">10:00 – 18:00</span><span class="day">Domingo</span><span class="time">12:00 – 18:00</span></div></div></div></div>
     </div>
@@ -1338,7 +1412,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="cta-sub rv d1">A parede não mente. Você descobre quem é em cima dela.<br>1ª compra com 40% OFF. Venha testar.</p>
   <div class="cta-actions rv d2">
     <button class="btn-primary" onclick="openModal('avulsa')" style="font-size:1.1rem;padding:20px 48px">🔥 Sim, Quero Minha Vaga com 40% OFF ↗</button>
-    <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065" class="btn-ghost" target="_blank" rel="noopener noreferrer">💬 Falar direto com o Rodrigo</a>
+    <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065" class="btn-ghost" target="_blank" rel="noopener noreferrer">💬 Falar direto com o Rodrigo</a>
   </div>
   <p class="cta-urgency rv d3">⚡ Vagas limitadas. Garanta a sua.</p>
 </section>
@@ -1348,7 +1422,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="footer-logo">K<span>Moon</span> Climb</div>
   <div class="footer-links">
     <a href="https://instagram.com/kmoonclimb" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    <a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     <a href="#plans">Planos</a>
     <a href="#ebooks">E-books</a>
   </div>
@@ -1356,7 +1430,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <!-- ── WHATSAPP FLOAT ── -->
-<a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" class="wa-float" href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="wa-float">
+<a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" class="wa-float" href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="wa-float">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.55 4.1 1.514 5.834L.058 23.717a.75.75 0 00.919.919l5.899-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.731 9.731 0 01-4.964-1.355l-.356-.213-3.7.911.932-3.683-.233-.381A9.75 9.75 0 1112 21.75z"/></svg>
 </a>
 
@@ -1533,8 +1607,14 @@ function submitForm(){
   if(tel) msg += `\nTelefone: ${tel}`;
   if(nivel) msg += `\nNível: ${nivel}`;
   if(objetivo) msg += `\nObjetivo: ${objetivo}`;
+  // Append gclid/UTM for Google Ads attribution
+  var gclid = window.KMOON_GCLID || sessionStorage.getItem('kmoon_gclid');
+  var utmSrc = window.KMOON_UTM_SOURCE || sessionStorage.getItem('kmoon_utm_source');
+  var utmCamp = window.KMOON_UTM_CAMPAIGN || sessionStorage.getItem('kmoon_utm_campaign');
+  if(gclid) msg += '\n\n[Ads: ' + gclid.substring(0,12) + '...]';
+  else if(utmSrc) msg += '\n\n[Origem: ' + utmSrc + (utmCamp ? ' / ' + utmCamp : '') + ']';
   if(typeof gtag!=='undefined'){
-    gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});
+    gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});
     gtag('event','whatsapp_click',{event_category:'conversion',event_label:currentModalType});
   }
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
@@ -1543,7 +1623,7 @@ function submitForm(){
 
 // WA float tracking
 document.getElementById('wa-float').addEventListener('click',()=>{
-  if(typeof gtag!=='undefined') gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});
+  if(typeof gtag!=='undefined') gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});
 });
 
 // ── COUNTER ANIMATION ──
@@ -1765,7 +1845,7 @@ document.addEventListener('DOMContentLoaded', function(){
     el.addEventListener('click', function(){
       if(typeof gtag !== 'undefined'){
         gtag('event','conversion',{
-          'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-',
+          'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-',
           'value': 1.0, 'currency': 'BRL'
         });
       }
@@ -1777,7 +1857,7 @@ document.addEventListener('DOMContentLoaded', function(){
     stickyCta.addEventListener('click', function(){
       if(typeof gtag !== 'undefined'){
         gtag('event','conversion',{
-          'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-',
+          'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-',
           'value': 1.0, 'currency': 'BRL'
         });
       }
@@ -1832,11 +1912,22 @@ function submitFreeEbook(){
   if(!nome){alert('Por favor, informe seu nome.');document.getElementById('fe-nome').focus();return;}
   if(!tel){alert('Por favor, informe seu WhatsApp.');document.getElementById('fe-tel').focus();return;}
   var msg='Ol\u00e1 Rodrigo! Quero receber o e-book GR\u00c1TIS "5 Movimentos que V\u00e3o Mudar Minha Escalada".\n\nNome: '+nome+'\nWhatsApp: '+tel;
-  try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-','value':0.1,'currency':'BRL'});}catch(e){}
+  // Append gclid/UTM for Google Ads attribution
+  var gclid = window.KMOON_GCLID || sessionStorage.getItem('kmoon_gclid');
+  var utmSrc = window.KMOON_UTM_SOURCE || sessionStorage.getItem('kmoon_utm_source');
+  if(gclid) msg += '\n\n[Ads: ' + gclid.substring(0,12) + '...]';
+  else if(utmSrc) msg += '\n\n[Origem: ' + utmSrc + ']';
+  try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-','value':0.1,'currency':'BRL'});}catch(e){}
   try{gtag('event','lead_free_ebook',{event_category:'lead',event_label:'5_movimentos',value:1});}catch(e){}
   window.open('https://wa.me/5521981003065?text='+encodeURIComponent(msg),'_blank');
   closeFreeEbookModal();
 }
 </script>
+
+<!-- ── FLOATING WA BUTTON (CRO) ── -->
+<a id="float-wa" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+saber+mais+sobre+as+aulas+de+escalada+em+Botafogo%21" target="_blank" rel="noopener" aria-label="Fale no WhatsApp" onclick="if(typeof gtag!=='undefined'){gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});gtag('event','float_wa_click',{event_category:'conversion',event_label:'float_button'});}" style="position:fixed;bottom:22px;right:20px;z-index:9999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);text-decoration:none;transition:transform .2s" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 </body>
 </html>
