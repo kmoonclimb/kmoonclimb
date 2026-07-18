@@ -6,6 +6,14 @@
 <title>KMoon Climb · Aulas de Escalada em Botafogo RJ · Indoor &amp; Outdoor</title>
 <meta name="description" content="Ex-atleta CDE, +200 alunos treinados. Aulas de escalada individuais e em grupo, indoor e outdoor, em Botafogo RJ. Sua 1ª compra com 40% OFF.">
 <link rel="canonical" href="https://kmoonclimb.com.br/">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="keywords" content="aulas de escalada botafogo, professor de escalada rj, escalada indoor rio de janeiro, aula de escalada rio de janeiro, escalada boulder botafogo, aulas escalada iniciante rj, escola de escalada botafogo, kmoon climb, rodrigo alves escalada, escalada outdoor rio de janeiro">
+<meta name="geo.region" content="BR-RJ">
+<meta name="geo.placename" content="Botafogo, Rio de Janeiro">
+<meta name="geo.position" content="-22.9519;-43.1862">
+<meta name="ICBM" content="-22.9519, -43.1862">
+<meta name="author" content="Rodrigo Alves — KMoon Climb">
+<meta name="theme-color" content="#ff6b00">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kmoonclimb.com.br/">
 <meta property="og:title" content="KMoon Climb · Aulas de Escalada em Botafogo RJ">
@@ -271,7 +279,7 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
 .footer-note{font-size:.75rem;color:var(--muted2)}
 
 /* ── WHATSAPP FLOAT ── */
-.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s}
+.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s,bottom .3s ease}
 .wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.5)}
 .wa-float svg{width:28px;height:28px;fill:#fff}
 
@@ -332,7 +340,13 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
   #trust-strip{gap:0;padding:12px 3vw}
   .trust-item{padding:6px 2vw}
   .sticky-cta-bar{display:flex}
-  .wa-float{bottom:5rem}
+  .wa-float{display:none !important}
+  #urgency-bar{display:none}
+}
+/* ── Desktop: hide WA btn in sticky bar (wa-float handles WA on desktop) ── */
+@media(min-width:901px){
+  .sticky-wa-btn{display:none !important}
+  .sticky-cta-bar .btn-primary{flex:1}
 }
 /* ═══════════════════════════════════════════════════════
    EBOOK CAROUSEL — KMoon (auto-rotate + detail panel)
@@ -518,6 +532,12 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
 @media(max-width:480px){
   section{padding:3.5rem 4vw}
   .ebook-carousel-outer{padding:0 28px}
+  .testimonials-grid{grid-template-columns:1fr !important}
+  .benefits-grid{grid-template-columns:1fr !important}
+  .benefits-header{grid-template-columns:1fr !important;gap:1.5rem}
+  nav .logo img{height:36px}
+  .hero-sub{font-size:clamp(.95rem,3.5vw,1.2rem)}
+  h2.sec-title{font-size:clamp(2rem,8.5vw,3.5rem)}
   .ebook-slider-track{gap:.8rem}
   .ebook-tile{flex:0 0 108px;width:108px}
   .ebook-arrow{width:28px;height:28px;font-size:1.2rem}
@@ -691,15 +711,17 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SportsActivityLocation",
+  "@type": ["LocalBusiness", "SportsActivityLocation"],
   "name": "KMoon Climb",
-  "description": "Aulas de escalada Boulder e Esportiva em Botafogo, Rio de Janeiro. Professor Rodrigo Alves, ex-atleta CDE.",
+  "legalName": "KMoon Climb — Rodrigo Alves",
+  "description": "Aulas de escalada Boulder e Esportiva em Botafogo, Rio de Janeiro. Professor Rodrigo Alves, ex-atleta militar CDE, mais de 200 alunos formados. Aulas indoor e outdoor, individuais e em grupo.",
   "url": "https://kmoonclimb.com.br/",
   "telephone": "+55-21-98100-3065",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Botafogo",
     "addressRegion": "RJ",
+    "postalCode": "22250",
     "addressCountry": "BR"
   },
   "geo": {
@@ -707,9 +729,69 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
     "latitude": -22.9519,
     "longitude": -43.1862
   },
-  "priceRange": "R$75-R$2.800",
+  "areaServed": {
+    "@type": "City",
+    "name": "Rio de Janeiro"
+  },
+  "priceRange": "R$75 – R$1.380",
   "openingHours": "Mo-Sa 06:00-22:00",
-  "sameAs": ["https://instagram.com/kmoonclimb"]
+  "currenciesAccepted": "BRL",
+  "paymentAccepted": "Pix, Cartão de Crédito",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Aulas de Escalada KMoon Climb",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Aula Avulsa de Escalada",
+        "description": "Aula avulsa de escalada indoor em Botafogo RJ",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plano Mensal Start",
+        "description": "Plano mensal de aulas de escalada — 8 aulas/mês",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock"
+      }
+    ]
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Rodrigo Alves",
+    "sameAs": "https://instagram.com/kmoonclimb"
+  },
+  "sameAs": [
+    "https://instagram.com/kmoonclimb"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Início",
+      "item": "https://kmoonclimb.com.br/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Aulas de Escalada",
+      "item": "https://kmoonclimb.com.br/#plans"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "E-books de Escalada",
+      "item": "https://kmoonclimb.com.br/#ebooks"
+    }
+  ]
 }
 </script>
 
@@ -734,48 +816,6 @@ footer{padding:2rem 5vw;border-top:1px solid var(--border);display:flex;align-it
   if(window.KMOON_UTM_CAMPAIGN) sessionStorage.setItem('kmoon_utm_campaign', window.KMOON_UTM_CAMPAIGN);
 })();
 
-// ─── Countdown Timer para urgency bar ───
-(function(){
-  function updateTimer(){
-    var el = document.getElementById('ub-timer');
-    if(!el) return;
-    
-    // Set deadline: end of today + 3 days (creates renewable urgency)
-    var stored = sessionStorage.getItem('kmoon_deadline');
-    var deadline;
-    if(stored){
-      deadline = new Date(parseInt(stored));
-    } else {
-      deadline = new Date();
-      deadline.setDate(deadline.getDate() + 3);
-      deadline.setHours(23, 59, 59, 0);
-      sessionStorage.setItem('kmoon_deadline', deadline.getTime().toString());
-    }
-    
-    var now = new Date();
-    var diff = Math.max(0, deadline - now);
-    
-    if(diff === 0){
-      el.textContent = 'Oferta encerrando';
-      return;
-    }
-    
-    var h = Math.floor(diff / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    
-    if(h > 0){
-      el.textContent = 'Encerra em ' + h + 'h ' + (m<10?'0'+m:m) + 'm';
-    } else {
-      el.textContent = 'Encerra em ' + m + 'm ' + (s<10?'0'+s:s) + 's';
-    }
-  }
-  
-  document.addEventListener('DOMContentLoaded', function(){
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  });
-})();
 </script>
 </head>
 <body>
@@ -817,7 +857,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="urgency-bar" style="background:linear-gradient(90deg,#cc3300,#ff4500);color:white;text-align:center;padding:10px 16px;font-size:14px;font-weight:700;position:relative;z-index:99;letter-spacing:.3px">
   🔥 <span id="ub-text">40% OFF na 1ª Compra • Vagas Limitadas em Botafogo</span>
   &nbsp;·&nbsp; <a onclick="openModal('avulsa')" style="color:#ffd700;text-decoration:underline;cursor:pointer;font-weight:900">Garantir Agora ↗</a>
-  &nbsp;·&nbsp; <span id="ub-timer" style="background:rgba(0,0,0,.25);padding:2px 8px;border-radius:12px;font-size:13px">carregando...</span>
 </div>
 <!-- END URGENCY BAR -->
 
@@ -1430,13 +1469,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <!-- ── WHATSAPP FLOAT ── -->
-<a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});}catch(e){}" class="wa-float" href="https://wa.me/5521981003065" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="wa-float">
+<a onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});gtag('event','float_wa_click',{event_category:'conversion',event_label:'float_button'});}catch(e){}" class="wa-float" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+saber+mais+sobre+as+aulas+de+escalada+em+Botafogo%21" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="wa-float">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.55 4.1 1.514 5.834L.058 23.717a.75.75 0 00.919.919l5.899-1.453A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.731 9.731 0 01-4.964-1.355l-.356-.213-3.7.911.932-3.683-.233-.381A9.75 9.75 0 1112 21.75z"/></svg>
 </a>
 
 <!-- ── STICKY CTA MOBILE ── -->
-<div class="sticky-cta-bar" id="sticky-cta">
-  <button onclick="openModal('avulsa')" class="btn-primary" style="width:100%;text-align:center;justify-content:center;display:flex">🔥 Garantir Vaga com 40% OFF ↗</button>
+<div class="sticky-cta-bar" id="sticky-cta" style="gap:8px">
+  <button onclick="openModal('avulsa')" class="btn-primary" style="flex:1;text-align:center;justify-content:center;display:flex;font-size:.85rem;padding:14px 10px">🔥 Garantir Vaga</button>
+  <a class="sticky-wa-btn" onclick="try{gtag('event','conversion',{'send_to':'AW-16775165166/2hrdCM3Gj74cEO7pgr8-'});}catch(e){}" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+saber+mais+sobre+as+aulas+de+escalada!" target="_blank" rel="noopener noreferrer" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:#25D366;color:#fff;border-radius:8px;font-family:var(--fh);font-weight:700;font-size:.85rem;padding:14px 10px;text-decoration:none">💬 WhatsApp</a>
 </div>
 
 <!-- ── MODAL ── -->
@@ -1652,11 +1692,17 @@ const revealObserver = new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rv').forEach(el=>revealObserver.observe(el));
 
-// ── STICKY CTA: hide on mobile when hero is visible ──
+// ── STICKY CTA: show/hide with hero scroll; lift wa-float above bar on desktop ──
 const heroSection = document.getElementById('hero');
 const stickyCta = document.getElementById('sticky-cta');
+const waFloat = document.querySelector('.wa-float');
 const stickyObserver = new IntersectionObserver(entries=>{
-  stickyCta.style.display = entries[0].isIntersecting ? 'none' : 'flex';
+  const stickyVisible = !entries[0].isIntersecting;
+  stickyCta.style.display = stickyVisible ? 'flex' : 'none';
+  // On desktop (wa-float visible), move it above sticky bar to avoid overlap
+  if(waFloat){
+    waFloat.style.bottom = stickyVisible ? 'calc(60px + 1.2rem)' : '1.5rem';
+  }
 },{threshold:0.1});
 stickyObserver.observe(heroSection);
 </script>
@@ -1876,7 +1922,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <div style="font-family:var(--fh);font-weight:900;font-size:1.15rem;color:#fff;line-height:1.3;margin-bottom:.5rem">5 Movimentos que V&#227;o<br>Mudar Sua Escalada</div>
       <div style="font-size:.75rem;color:rgba(255,255,255,.5)">Rodrigo Alves &middot; @kmoonclimb</div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:.85rem">
+    <div id="fe-form-fields" style="display:flex;flex-direction:column;gap:.85rem">
       <div>
         <label style="font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:.35rem">Seu nome</label>
         <input id="fe-nome" type="text" placeholder="Como posso te chamar?" style="width:100%;background:#1a1a1a;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:.75rem 1rem;color:#fff;font-size:.9rem;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='rgba(76,175,80,.6)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" />
@@ -1888,13 +1934,29 @@ document.addEventListener('DOMContentLoaded', function(){
       <button onclick="submitFreeEbook()" style="width:100%;background:#4caf50;color:#fff;font-family:var(--fh);font-weight:900;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:6px;padding:.9rem;cursor:pointer;margin-top:.25rem">
         Quero Receber Gr&#225;tis &#8594;
       </button>
-      <p style="font-size:.65rem;color:rgba(255,255,255,.3);text-align:center;margin:0;line-height:1.5">Sem spam. Voc&#234; ser&#225; redirecionado ao WhatsApp do Rodrigo para receber o PDF.</p>
+      <p style="font-size:.65rem;color:rgba(255,255,255,.3);text-align:center;margin:0;line-height:1.5">Gratuito. Seu WhatsApp ser&aacute; salvo para Rodrigo entrar em contato com dicas exclusivas.</p>
+    </div>
+    <div id="fe-success" style="display:none;text-align:center;padding:.25rem 0">
+      <div style="font-size:2.8rem;margin-bottom:.6rem">&#9989;</div>
+      <div style="font-family:var(--fh);font-weight:900;font-size:1.15rem;color:#4caf50;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem">E-book Pronto!</div>
+      <div style="font-size:.85rem;color:rgba(255,255,255,.65);margin-bottom:1.5rem;line-height:1.6">Clique abaixo para baixar agora.<br>Acesso imediato &mdash; 100% gratuito.</div>
+      <a id="fe-download-btn" href="#" target="_blank" rel="noopener" style="display:block;width:100%;background:#4caf50;color:#fff;font-family:var(--fh);font-weight:900;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:1rem;cursor:pointer;text-decoration:none;box-sizing:border-box;text-align:center">&#8595;&nbsp;&nbsp;Baixar E-book Agora</a>
+      <button onclick="closeFreeEbookModal()" style="margin-top:1rem;background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:.45rem 1rem;border-radius:4px;cursor:pointer">Fechar</button>
+      <p style="font-size:.62rem;color:rgba(255,255,255,.22);text-align:center;margin:.8rem 0 0;line-height:1.5">Seus dados foram salvos. Rodrigo pode te enviar dicas exclusivas no WhatsApp.</p>
     </div>
   </div>
 </div>
 <script>
+// ── E-BOOK GRÁTIS — URL do PDF. Rodrigo: cole aqui o link do Google Drive / Kiwify / Dropbox ──
+var EBOOK_5MOV_LINK = 'https://drive.google.com/COLE_AQUI_O_LINK_DO_PDF';
 function openFreeEbookModal(){
   var m=document.getElementById('modal-free-ebook');
+  var ff=document.getElementById('fe-form-fields');
+  var fs=document.getElementById('fe-success');
+  if(ff) ff.style.display='flex';
+  if(fs) fs.style.display='none';
+  document.getElementById('fe-nome').value='';
+  document.getElementById('fe-tel').value='';
   m.style.display='flex';
   document.body.style.overflow='hidden';
 }
@@ -1902,6 +1964,10 @@ function closeFreeEbookModal(){
   var m=document.getElementById('modal-free-ebook');
   m.style.display='none';
   document.body.style.overflow='';
+  var ff=document.getElementById('fe-form-fields');
+  var fs=document.getElementById('fe-success');
+  if(ff) ff.style.display='flex';
+  if(fs) fs.style.display='none';
 }
 function closeFreeEbookModalOutside(e){
   if(e.target===document.getElementById('modal-free-ebook')) closeFreeEbookModal();
@@ -1911,23 +1977,30 @@ function submitFreeEbook(){
   var tel=document.getElementById('fe-tel').value.trim();
   if(!nome){alert('Por favor, informe seu nome.');document.getElementById('fe-nome').focus();return;}
   if(!tel){alert('Por favor, informe seu WhatsApp.');document.getElementById('fe-tel').focus();return;}
-  var msg='Ol\u00e1 Rodrigo! Quero receber o e-book GR\u00c1TIS "5 Movimentos que V\u00e3o Mudar Minha Escalada".\n\nNome: '+nome+'\nWhatsApp: '+tel;
-  // Append gclid/UTM for Google Ads attribution
+  // Build WhatsApp message for lead capture
+  var msg='Ol\u00e1 Rodrigo! Solicitei o e-book GR\u00c1TIS "5 Movimentos que V\u00e3o Mudar Minha Escalada".\n\nNome: '+nome+'\nWhatsApp: '+tel;
   var gclid = window.KMOON_GCLID || sessionStorage.getItem('kmoon_gclid');
   var utmSrc = window.KMOON_UTM_SOURCE || sessionStorage.getItem('kmoon_utm_source');
   if(gclid) msg += '\n\n[Ads: ' + gclid.substring(0,12) + '...]';
   else if(utmSrc) msg += '\n\n[Origem: ' + utmSrc + ']';
+  // Fire Google Ads conversion + custom event
   try{gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-','value':0.1,'currency':'BRL'});}catch(e){}
   try{gtag('event','lead_free_ebook',{event_category:'lead',event_label:'5_movimentos',value:1});}catch(e){}
-  window.open('https://wa.me/5521981003065?text='+encodeURIComponent(msg),'_blank');
-  closeFreeEbookModal();
+  // Open WhatsApp silently for lead capture (user goes directly to download)
+  setTimeout(function(){ window.open('https://wa.me/5521981003065?text='+encodeURIComponent(msg),'_blank'); }, 800);
+  // ── AUTO-DELIVERY: show success state with direct download link ──
+  document.getElementById('fe-form-fields').style.display='none';
+  var fs=document.getElementById('fe-success');
+  fs.style.display='block';
+  document.getElementById('fe-download-btn').href=EBOOK_5MOV_LINK;
+  // Update modal title to reinforce success
+  try{
+    var h=document.querySelector('#modal-free-ebook [style*="1.15rem"]');
+    if(h) h.innerHTML='5 Movimentos que V&#227;o<br>Mudar Sua Escalada';
+  }catch(e){}
 }
 </script>
 
-<!-- ── FLOATING WA BUTTON (CRO) ── -->
-<a id="float-wa" href="https://wa.me/5521981003065?text=Ol%C3%A1+Rodrigo%21+Vi+seu+site+e+quero+saber+mais+sobre+as+aulas+de+escalada+em+Botafogo%21" target="_blank" rel="noopener" aria-label="Fale no WhatsApp" onclick="if(typeof gtag!=='undefined'){gtag('event','conversion',{'send_to':'AW-16775165166/RpJdCKDT_84cEO7pgr8-'});gtag('event','float_wa_click',{event_category:'conversion',event_label:'float_button'});}" style="position:fixed;bottom:22px;right:20px;z-index:9999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);text-decoration:none;transition:transform .2s" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 
 </body>
 </html>
